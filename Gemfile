@@ -5,12 +5,15 @@ ruby "2.2.0"
 gem 'rails', '4.2.0'
 gem 'puma', '2.11.3'
 gem 'pg'
+gem 'devise', '3.5.2'
 
 # Assets
+gem 'bootstrap-sass', '3.3.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
+
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -20,7 +23,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Heroku
-gem 'rails_12factor', group: :production 
+gem 'rails_12factor', group: :production
 
 group :development do
   gem 'quiet_assets'
@@ -37,5 +40,7 @@ group :development, :test do
   gem 'spring'
   gem 'dotenv-rails', '2.0.2'
 end
+
+
 
 
