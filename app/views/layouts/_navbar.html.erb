@@ -1,8 +1,11 @@
 <nav class="navbar navbar-default">
-<div class="container-fluid">
+<div class="container">
   <div class="navbar-header">
     <%= link_to 'Fused4', root_path, class: 'navbar-brand' %>
     <a class="navbar-brand" href=""></a>
   </div>
+  <ul class="nav navbar-nav navbar-right">
+    <li><%= link_to 'Sign up', new_user_registration_path %> </li>
+  </ul>
 </div>
 </nav>
