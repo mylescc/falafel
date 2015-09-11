@@ -6,6 +6,7 @@ gem 'rails', '4.2.0'
 gem 'puma', '2.11.3'
 gem 'pg'
 gem 'devise', '3.5.2'
+gem 'activeadmin', '~> 1.0.0.pre1'
 
 # Assets
 gem 'bootstrap-sass', '3.3.5.1'
