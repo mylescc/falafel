@@ -33,6 +33,10 @@ group :development do
   gem 'bullet'
 end
 
+group :test do
+  gem 'shoulda-matchers', '2.8.0'
+end
+
 group :development, :test do
   gem 'rspec-rails', '3.3.2'
   gem 'pry-rails', '~> 0.3.2'
@@ -40,7 +44,3 @@ group :development, :test do
   gem 'spring'
   gem 'dotenv-rails', '2.0.2'
 end
-
-
-
-
