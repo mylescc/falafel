@@ -1,0 +1,28 @@
+<h2>Basic Details</h2>
+<hr/>
+<p>Note about basic details and why you need to complete</p>
+<%= form_for @details do |f| %>
+  <h3>Personal</h3>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :postcode %>
+    <%= f.text_field :postcode , class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email%>
+    <%= f.email_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone %>
+    <%= f.phone_field :phone, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Submit',  class: 'btn btn-default' %>
+
+<% end %>

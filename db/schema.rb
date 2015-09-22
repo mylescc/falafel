@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20150922194321) do
 
   create_table "personal_details", force: :cascade do |t|
     t.string   "name"
+    t.string   "email"
     t.string   "postcode"
     t.string   "phone"
     t.integer  "uk_status"

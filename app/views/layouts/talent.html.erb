@@ -1,11 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= render 'layouts/head' %>
+</head>
+<body>
+<%= render 'layouts/navbar' %>
+<%= render 'layouts/notifications' %>
+
 <div class="container-fluid">
 <div class="row">
   <div class="col-sm-2">
     <h1>Profile</h1>
-
-    <h2>Personal Info</h2>
+    <hr/>
     <ul class="nav nav-pills nav-stacked">
-      <li><%= link_to 'Basic Details', '' %></li>
+      <li><%= link_to 'Basic Details', nav_personal_details_link(current_user)  %></li>
       <li><%= link_to 'Role Preferences', '' %></li>
       <li><%= link_to 'Video Statment', '' %></li>
     </ul>
@@ -13,6 +21,11 @@
   </div>
   <div class="col-sm-8">
 
+    <%= yield %>
+
   </div>
 </div>
 </div>
+
+</body>
+</html>

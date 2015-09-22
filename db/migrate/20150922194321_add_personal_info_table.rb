@@ -2,6 +2,7 @@ class AddPersonalInfoTable < ActiveRecord::Migration
   def change
     create_table :personal_details do |t|
       t.string :name
+      t.string :email
       t.string :postcode
       t.string :phone
       t.integer :uk_status
