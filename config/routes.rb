@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get 'talent', to: 'home#talent'
 
   resources :personal_details, only: [:new, :show, :create, :edit, :update]
+
+  resources :roles, only: [:new, :create]
 end
