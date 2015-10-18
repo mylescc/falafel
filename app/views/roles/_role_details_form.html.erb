@@ -9,13 +9,15 @@
         <div class="form-inline">
           <div class="form-group">
             <label for='permPrefLocation'>Preferred Location</label></br>
-            <input id='permPrefLocation' class="form-control" type="text" />
-            <select class="form-control">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
+            <p>
+              <input id='permPrefLocation' class="form-control" type="text" />
+              <select class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+              </select>
+            </p>
           </div>
         </div>
         <div class="form-group">
@@ -48,13 +50,15 @@
         <div class="form-inline">
           <div class="form-group">
             <label for='contractPrefLocation'>Preferred Location</label>
-            <input id='contractPrefLocation' class="form-control" type="text" />
-            <select class="form-control">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
+            <p>
+              <input id='contractPrefLocation' class="form-control" type="text" />
+              <select class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+              </select>
+            </p>
           </div>
         </div>
         <div class="form-group">
@@ -67,8 +71,13 @@
             </select>
         </div>
         <div class="form-group">
-          <label for='availabilityDate'>Availability Date</label>
-          <input id='availabilityDate' class="form-control" type="text" />
+          <label for='availableDate'>Available date</label>
+          <p class="input-group">
+            <input id='availableDate' type="date" class="form-control" uib-datepicker-popup ng-model="ctrl.selectedDate" is-open="ctrl.calendarStatus.opened" min-date="ctrl.availableMinDate" max-date="ctrl.availableMaxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
         </div>
         <div class="form-group">
           <label for='contractTravelWillingness'>Willing to travel with work</label>
