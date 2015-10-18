@@ -1,0 +1,90 @@
+<form ng-submit="ctrl.submitRole(ctrl.currentRole)">
+    <div class="row">
+      <div class="col-sm-6 role-type-selection-container">
+        <div class="role-type-selection"><label><input type="checkbox" id="permanent" value="permanent"> Permanent</label></div>
+        <div class="form-group">
+          <label for='minSalary'>Minimum Annual Salary</label>
+          <input id='minSalary' class="form-control" type='text' />
+        </div>
+        <div class="form-inline">
+          <div class="form-group">
+            <label for='permPrefLocation'>Preferred Location</label></br>
+            <input id='permPrefLocation' class="form-control" type="text" />
+            <select class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for='permCurrentNotice'>Current Notice Period</label>
+            <select id='permCurrentNotice' class="form-control">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for='permTravelWillingness'>Willing to travel with work</label>
+            <select id='permTravelWillingness' class="form-control">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for='numPermRoles'>Number of permanent roles in the last 5 years</label>
+          <input id='numPermRoles' class="form-control" type="text" />
+        </div>
+      </div>
+      <div class="col-sm-6 role-type-selection-container">
+        <div class="role-type-selection"><label><input type="checkbox" id="permanent" value="permanent"> Contract</label></div>
+         <div class="form-group">
+          <label for='minDayRate'>Minimum Day Rate</label>
+          <input id='minDayRate' class="form-control" type="text" />
+        </div>
+        <div class="form-inline">
+          <div class="form-group">
+            <label for='contractPrefLocation'>Preferred Location</label>
+            <input id='contractPrefLocation' class="form-control" type="text" />
+            <select class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+        <label for='contractCurrentNotice'>Current Notice Period</label>
+            <select id="contractCurrentNotice" class="form-control">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for='availabilityDate'>Availability Date</label>
+          <input id='availabilityDate' class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+          <label for='contractTravelWillingness'>Willing to travel with work</label>
+            <select id='contractTravelWillingness' class="form-control">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for='numContracts'>Number of contracts in the last 5 years</label>
+          <input id='numContracts' class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+          <label for='numContractsExtensions'>Number of contract extensions in the last 5 years</label>
+          <input id='numContractsExtensions' class="form-control" type="text" />
+        </div>
+      </div>
+    </div>
+  </form>
