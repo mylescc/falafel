@@ -3,14 +3,12 @@
   <hr/>
   <p>Some content advising talent how to choose their 3 role options that we will provide</p>
   <div class="row">
-    <div class="col-sm-4 role-option-container">
-      <div class="role-option" ng-click="ctrl.showRole(0)">Role 1</div>
-    </div>
-    <div class="col-sm-4 role-option-container">
-      <div class="role-option" ng-click="ctrl.showRole(1)">Role 2</div>
-    </div>
-    <div class="col-sm-4 role-option-container">
-      <div class="role-option" ng-click="ctrl.showRole(2)">Role 3</div>
+    <div ng-repeat="role in ctrl.roles" class="col-sm-4 role-option-container">
+      <div  class="role-option"
+            ng-class="{'selected': ctrl.currentRole === role}"
+            ng-click="ctrl.showRole($index)">
+        Role {{ $index + 1 }}
+      </div>
     </div>
   </div>
   <%= render partial: 'role_details_form' %>
