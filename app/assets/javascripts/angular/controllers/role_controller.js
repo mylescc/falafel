@@ -7,9 +7,9 @@
       this.currentRole = this.roles[index];
     };
 
-    this.submitRole = function(role) {
-      console.log('submit role called');
-      console.log(role);
+    this.saveRoleChanges = function() {
+      console.log('saving roles')
+      console.log(this.roles)
     };
 
     this.openCalendar = function($event) {
