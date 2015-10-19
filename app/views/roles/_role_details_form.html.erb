@@ -1,17 +1,21 @@
-<form ng-submit="ctrl.submitRole(ctrl.currentRole)">
+<form ng-submit="ctrl.saveRoleChanges()">
     <div class="row">
       <div class="col-sm-6 role-type-selection-container">
-        <div class="role-type-selection"><label><input type="checkbox" id="permanent" value="permanent"> Permanent</label></div>
+        <div class="role-type-selection">
+        <label><input type="checkbox" ng-model='ctrl.currentRole.permanent' id="permanent" value="permanent"> Permanent</label></div>
         <div class="form-group">
           <label for='minSalary'>Minimum Annual Salary</label>
-          <input id='minSalary' class="form-control" type='text' />
+          <input id='minSalary' ng-model='ctrl.currentRole.min_salary' class="form-control" type='text' />
         </div>
         <div class="form-inline">
           <div class="form-group">
             <label for='permPrefLocation'>Preferred Location</label></br>
             <p>
-              <input id='permPrefLocation' class="form-control" type="text" />
-              <select class="form-control">
+              <input  id='permPrefLocation'
+                      ng-model='ctrl.currentRole.permanent_postcode'
+                      class="form-control"
+                      type="text" />
+              <select ng-model='ctrl.currentRole.permanent_max_travel_distance' class="form-control">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -22,7 +26,9 @@
         </div>
         <div class="form-group">
           <label for='permCurrentNotice'>Current Notice Period</label>
-            <select id='permCurrentNotice' class="form-control">
+            <select id='permCurrentNotice'
+                    ng-model='ctrl.currentRole.permanent_current_notice_period'
+                    class="form-control">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -31,28 +37,41 @@
         </div>
         <div class="form-group">
           <label for='permTravelWillingness'>Willing to travel with work</label>
-            <select id='permTravelWillingness' class="form-control">
+            <select id='permTravelWillingness'
+                    ng-model='ctrl.currentRole.permanent_work_travel_willingness'
+                    class="form-control">
               <option value="1">1</option>
               <option value="2">2</option>
             </select>
         </div>
         <div class="form-group">
           <label for='numPermRoles'>Number of permanent roles in the last 5 years</label>
-          <input id='numPermRoles' class="form-control" type="text" />
+          <input  id='numPermRoles'
+                  ng-model='ctrl.currentRole.num_permanent_roles'
+                  class="form-control" type="text" />
         </div>
       </div>
       <div class="col-sm-6 role-type-selection-container">
-        <div class="role-type-selection"><label><input type="checkbox" id="permanent" value="permanent"> Contract</label></div>
+        <div class="role-type-selection">
+          <label><input type="checkbox" ng-model='ctrl.currentRole.contractor' id="contract" value="permanent"> Contract</label>
+        </div>
          <div class="form-group">
           <label for='minDayRate'>Minimum Day Rate</label>
-          <input id='minDayRate' class="form-control" type="text" />
+          <input  id='minDayRate'
+                  ng-model='ctrl.currentRole.min_day_rate'
+                  class="form-control"
+                  type="text" />
         </div>
         <div class="form-inline">
           <div class="form-group">
             <label for='contractPrefLocation'>Preferred Location</label>
             <p>
-              <input id='contractPrefLocation' class="form-control" type="text" />
-              <select class="form-control">
+              <input  id='contractPrefLocation'
+                      ng-model='ctrl.currentRole.contract_postcode'
+                      class="form-control"
+                      type="text" />
+              <select ng-model='ctrl.currentRole.contract_max_travel_distance'
+                      class="form-control">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -63,7 +82,9 @@
         </div>
         <div class="form-group">
         <label for='contractCurrentNotice'>Current Notice Period</label>
-            <select id="contractCurrentNotice" class="form-control">
+            <select id="contractCurrentNotice"
+                    ng-model='ctrl.currentRole.contractor_current_notice_period'
+                    class="form-control">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -73,7 +94,16 @@
         <div class="form-group">
           <label for='availableDate'>Available date</label>
           <p class="input-group">
-            <input id='availableDate' type="date" class="form-control" uib-datepicker-popup ng-model="ctrl.selectedDate" is-open="ctrl.calendarStatus.opened" min-date="ctrl.availableMinDate" max-date="ctrl.availableMaxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <input  id='availableDate'
+                    type="date"
+                    class="form-control"
+                    uib-datepicker-popup
+                    ng-model='ctrl.currentRole.contract_available_at'
+                    is-open="ctrl.calendarStatus.opened"
+                    min-date="ctrl.availableMinDate"
+                    max-date="ctrl.availableMaxDate"
+                    datepicker-options="dateOptions"
+                    ng-required="false" close-text="Close" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
@@ -81,19 +111,30 @@
         </div>
         <div class="form-group">
           <label for='contractTravelWillingness'>Willing to travel with work</label>
-            <select id='contractTravelWillingness' class="form-control">
+            <select id='contractTravelWillingness'
+                    ng-model='ctrl.currentRole.contract_work_travel_willingness'
+                    class="form-control">
               <option value="1">1</option>
               <option value="2">2</option>
             </select>
         </div>
         <div class="form-group">
           <label for='numContracts'>Number of contracts in the last 5 years</label>
-          <input id='numContracts' class="form-control" type="text" />
+          <input  id='numContracts'
+                  ng-model='ctrl.currentRole.num_contracts'
+                  class="form-control"
+                  type="text" />
         </div>
         <div class="form-group">
           <label for='numContractsExtensions'>Number of contract extensions in the last 5 years</label>
-          <input id='numContractsExtensions' class="form-control" type="text" />
+          <input  id='numContractsExtensions'
+                  ng-model='ctrl.currentRole.num_extensions'
+                  class="form-control"
+                  type="text" />
         </div>
+      </div>
+      <div class="col-xs-12">
+        <input type="submit" class="btn btn-primary" value="Save" />
       </div>
     </div>
   </form>
