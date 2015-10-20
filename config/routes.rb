@@ -7,5 +7,8 @@ Rails.application.routes.draw do
 
   resources :personal_details, only: [:new, :show, :create, :edit, :update]
 
-  resources :roles, only: [:new, :create]
+  controller :roles do
+    get   'roles/show'     => :show
+    patch 'roles/update'   => :update
+  end
 end

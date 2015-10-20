@@ -1,3 +1,7 @@
+<script type="text/javascript">
+  angular.module('Fused4').constant('Roles',
+   <%= @roles.to_json.html_safe %>);
+</script>
 <div ng-controller='RoleController as ctrl'>
   <h2>Role Preferences</h2>
   <hr/>

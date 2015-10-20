@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function RoleController() {
+  function RoleController(Roles) {
     this.showRole = function(index) {
       console.log('showing role ' + (index + 1));
       this.currentRole = this.roles[index];
@@ -16,8 +16,8 @@
       this.calendarStatus.opened = true;
     };
 
-    //mocking an array of the 3 user roles
-    this.roles = [{}, {}, {}];
+    console.log(Roles);
+    this.roles = Roles;
     this.showRole(0);
     this.calendarStatus = {
       opened: false
@@ -26,6 +26,6 @@
     this.availableMaxDate = new Date(2020, 12, 31);
   };
 
-  RoleController.$inject = [];
+  RoleController.$inject = ['Roles'];
   angular.module('Fused4').controller('RoleController', RoleController);
 })();
