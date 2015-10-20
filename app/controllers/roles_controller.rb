@@ -1,7 +1,7 @@
 class RolesController < ApplicationController
   layout 'talent'
 
-  def new
+  def show
     #just mocking sending down the three user
     # roles in the laziest way i could think of
     @roles = [
@@ -11,6 +11,6 @@ class RolesController < ApplicationController
     ]
   end
 
-  def create
+  def update
   end
 end
