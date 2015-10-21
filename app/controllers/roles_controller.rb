@@ -9,6 +9,7 @@ class RolesController < ApplicationController
       Role.new(user: current_user, min_salary: 40000, min_day_rate: 450),
       Role.new(user: current_user, min_salary: 20000, min_day_rate: 250)
     ]
+    @role_distances = RoleDistance.all
   end
 
   def update
