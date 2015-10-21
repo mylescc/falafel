@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020234546) do
+ActiveRecord::Schema.define(version: 20151021212045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "personal_details", force: :cascade do |t|
     t.string   "name"
@@ -29,6 +30,11 @@ ActiveRecord::Schema.define(version: 20151020234546) do
 
   create_table "role_distances", force: :cascade do |t|
     t.integer "distance"
+    t.string  "label"
+  end
+
+  create_table "role_travel_willingness_options", force: :cascade do |t|
+    t.integer "value"
     t.string  "label"
   end
 
@@ -52,6 +58,7 @@ ActiveRecord::Schema.define(version: 20151020234546) do
     t.integer  "contract_work_travel_willingness"
     t.datetime "contract_available_at"
     t.integer  "role_distance_id"
+    t.integer  "role_travel_willingness_option_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,5 +81,6 @@ ActiveRecord::Schema.define(version: 20151020234546) do
 
   add_foreign_key "personal_details", "users"
   add_foreign_key "roles", "role_distances"
+  add_foreign_key "roles", "role_travel_willingness_options"
   add_foreign_key "roles", "users"
 end
