@@ -10,6 +10,7 @@ class RolesController < ApplicationController
       Role.new(user: current_user, min_salary: 20000, min_day_rate: 250)
     ]
     @role_distances = RoleDistance.all
+    @travel_willingness_options = RoleTravelWillingnessOption.all
   end
 
   def update

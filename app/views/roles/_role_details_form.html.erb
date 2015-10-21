@@ -16,10 +16,9 @@
                       class="form-control"
                       type="text" />
               <select ng-model='ctrl.currentRole.permanent_max_travel_distance' class="form-control">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                  <% @role_distances.each do |option| %>
+                    <option value="<%= option.id %>"><%= option.label %></option>
+                  <% end %>
               </select>
             </p>
           </div>
@@ -40,8 +39,9 @@
             <select id='permTravelWillingness'
                     ng-model='ctrl.currentRole.permanent_work_travel_willingness'
                     class="form-control">
-              <option value="1">1</option>
-              <option value="2">2</option>
+              <% @travel_willingness_options.each do |option| %>
+                <option value="<%= option.id %>"><%= option.label %></option>
+              <% end %>
             </select>
         </div>
         <div class="form-group">
@@ -72,10 +72,9 @@
                       type="text" />
               <select ng-model='ctrl.currentRole.contract_max_travel_distance'
                       class="form-control">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                  <% @role_distances.each do |option| %>
+                    <option value="<%= option.id %>"><%= option.label %></option>
+                  <% end %>
               </select>
             </p>
           </div>
@@ -114,8 +113,9 @@
             <select id='contractTravelWillingness'
                     ng-model='ctrl.currentRole.contract_work_travel_willingness'
                     class="form-control">
-              <option value="1">1</option>
-              <option value="2">2</option>
+            <% @travel_willingness_options.each do |option| %>
+              <option value="<%= option.id %>"><%= option.label %></option>
+            <% end %>
             </select>
         </div>
         <div class="form-group">
