@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022200816) do
+ActiveRecord::Schema.define(version: 20151022203811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "personal_details", force: :cascade do |t|
     t.string   "name"
@@ -41,8 +42,6 @@ ActiveRecord::Schema.define(version: 20151022200816) do
     t.integer  "min_salary"
     t.integer  "min_day_rate"
     t.string   "permanent_postcode"
-    t.integer  "permanent_max_travel_distance"
-    t.integer  "max_travel_time"
     t.integer  "num_permanent_roles"
     t.integer  "num_contracts"
     t.integer  "num_extensions"
@@ -50,11 +49,8 @@ ActiveRecord::Schema.define(version: 20151022200816) do
     t.boolean  "permanent",                                   default: false
     t.boolean  "contractor",                                  default: false
     t.string   "contract_postcode"
-    t.integer  "contract_max_travel_distance"
     t.integer  "permanent_current_notice_period"
     t.integer  "contractor_current_notice_period"
-    t.integer  "permanent_work_travel_willingness"
-    t.integer  "contract_work_travel_willingness"
     t.datetime "contract_available_at"
     t.integer  "contract_role_distance_id"
     t.integer  "permanent_role_distance_id"
