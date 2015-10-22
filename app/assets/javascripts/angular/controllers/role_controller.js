@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function RoleController(Roles) {
+  function RoleController(Roles, $http) {
     this.showRole = function(index) {
       console.log('showing role ' + (index + 1));
       this.currentRole = this.roles[index];
@@ -26,6 +26,6 @@
     this.availableMaxDate = new Date(2020, 12, 31);
   };
 
-  RoleController.$inject = ['Roles'];
+  RoleController.$inject = ['Roles', '$http'];
   angular.module('Fused4').controller('RoleController', RoleController);
 })();
