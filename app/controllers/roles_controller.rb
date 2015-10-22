@@ -14,5 +14,7 @@ class RolesController < ApplicationController
   end
 
   def update
+    p params
+    return render json: { test: 'hoho' }
   end
 end
