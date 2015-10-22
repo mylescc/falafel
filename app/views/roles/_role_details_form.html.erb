@@ -15,7 +15,7 @@
                       ng-model='ctrl.currentRole.permanent_postcode'
                       class="form-control"
                       type="text" />
-              <select ng-model='ctrl.currentRole.permanent_max_travel_distance' class="form-control">
+              <select ng-model='ctrl.currentRole.permanent_role_distance_id' class="form-control">
                   <% @role_distances.each do |option| %>
                     <option value="<%= option.id %>"><%= option.label %></option>
                   <% end %>
@@ -37,7 +37,7 @@
         <div class="form-group">
           <label for='permTravelWillingness'>Willing to travel with work</label>
             <select id='permTravelWillingness'
-                    ng-model='ctrl.currentRole.permanent_work_travel_willingness'
+                    ng-model='ctrl.currentRole.permanent_role_travel_willingness_option_id'
                     class="form-control">
               <% @travel_willingness_options.each do |option| %>
                 <option value="<%= option.id %>"><%= option.label %></option>
@@ -70,7 +70,7 @@
                       ng-model='ctrl.currentRole.contract_postcode'
                       class="form-control"
                       type="text" />
-              <select ng-model='ctrl.currentRole.contract_max_travel_distance'
+              <select ng-model='ctrl.currentRole.contract_role_distance_id'
                       class="form-control">
                   <% @role_distances.each do |option| %>
                     <option value="<%= option.id %>"><%= option.label %></option>
@@ -111,7 +111,7 @@
         <div class="form-group">
           <label for='contractTravelWillingness'>Willing to travel with work</label>
             <select id='contractTravelWillingness'
-                    ng-model='ctrl.currentRole.contract_work_travel_willingness'
+                    ng-model='ctrl.currentRole.contract_role_travel_willingness_option_id'
                     class="form-control">
             <% @travel_willingness_options.each do |option| %>
               <option value="<%= option.id %>"><%= option.label %></option>
