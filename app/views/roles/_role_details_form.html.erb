@@ -102,7 +102,8 @@
                     min-date="ctrl.availableMinDate"
                     max-date="ctrl.availableMaxDate"
                     datepicker-options="dateOptions"
-                    ng-required="false" close-text="Close" />
+                    ng-required="ctrl.currentRole.contractor"
+                    close-text="Close" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
