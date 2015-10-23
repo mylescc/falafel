@@ -2,13 +2,7 @@ class RolesController < ApplicationController
   layout 'talent'
 
   def show
-    #just mocking sending down the three user
-    # roles in the laziest way i could think of
-    @roles = [
-      Role.new(user: current_user, min_salary: 60000, min_day_rate: 550),
-      Role.new(user: current_user, min_salary: 40000, min_day_rate: 450),
-      Role.new(user: current_user, min_salary: 20000, min_day_rate: 250)
-    ]
+    @roles = user_roles
     @role_distances = RoleDistance.all
     @travel_willingness_options = RoleTravelWillingnessOption.all
   end
@@ -17,4 +11,13 @@ class RolesController < ApplicationController
     p params
     return render json: { test: 'hoho' }
   end
+
+  private
+
+  def user_roles
+    existing = current_user.roles
+    remainder = (1..(3-existing.count)).map{ |_| Role.new }
+    existing + remainder
+  end
+
 end
