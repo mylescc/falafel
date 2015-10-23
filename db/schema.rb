@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022203811) do
+ActiveRecord::Schema.define(version: 20151023150239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "personal_details", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +56,33 @@ ActiveRecord::Schema.define(version: 20151022203811) do
     t.integer  "contract_role_travel_willingness_option_id"
     t.integer  "permanent_role_travel_willingness_option_id"
   end
+
+  create_table "user_experience_industries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "industry"
+    t.integer "primary_activity"
+    t.integer "years_experience"
+  end
+
+  add_index "user_experience_industries", ["user_id"], name: "index_user_experience_industries_on_user_id", using: :btree
+
+  create_table "user_experience_management_skills", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "industry"
+    t.integer "primary_activity"
+    t.integer "years_experience"
+  end
+
+  add_index "user_experience_management_skills", ["user_id"], name: "index_user_experience_management_skills_on_user_id", using: :btree
+
+  create_table "user_experience_roles", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "name"
+    t.integer "primary_activity"
+    t.integer "years_experience"
+  end
+
+  add_index "user_experience_roles", ["user_id"], name: "index_user_experience_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
