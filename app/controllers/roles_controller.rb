@@ -8,8 +8,8 @@ class RolesController < ApplicationController
   end
 
   def update
-    p params
-    return render json: { test: 'hoho' }
+    p update_roles_params
+    return render json: { roles: user_roles }
   end
 
   private
@@ -18,6 +18,10 @@ class RolesController < ApplicationController
     existing = current_user.roles
     remainder = (1..(3-existing.count)).map{ |_| Role.new(user: current_user) }
     existing + remainder
+  end
+
+  def update_roles_params
+    params.require(:roles).map{ |role| role.slice(*Role.attribute_names) }
   end
 
 end
