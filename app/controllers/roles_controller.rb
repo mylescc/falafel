@@ -16,7 +16,7 @@ class RolesController < ApplicationController
 
   def user_roles
     existing = current_user.roles
-    remainder = (1..(3-existing.count)).map{ |_| Role.new }
+    remainder = (1..(3-existing.count)).map{ |_| Role.new(user: current_user) }
     existing + remainder
   end
 
