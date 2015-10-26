@@ -9,19 +9,27 @@ class RolesController < ApplicationController
 
   def update
     p update_roles_params
+    user_roles.each_with_index do | role, index |
+      role.save if role.new_record?
+      role.update(update_roles_params[index])
+    end
     return render json: { roles: user_roles }
   end
 
   private
 
   def user_roles
-    existing = current_user.roles
+    existing = current_user.roles.reverse
     remainder = (1..(3-existing.count)).map{ |_| Role.new(user: current_user) }
     existing + remainder
   end
 
   def update_roles_params
-    params.require(:roles).map{ |role| role.slice(*Role.attribute_names) }
+    params.require(:roles).map{|role| role.permit(*Role.attribute_names.reject{ |attrib| filtered_role_params.include?(attrib) }) }
+  end
+
+  def filtered_role_params
+    ['id', 'user_id']
   end
 
 end

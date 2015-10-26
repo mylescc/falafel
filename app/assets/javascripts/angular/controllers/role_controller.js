@@ -16,6 +16,7 @@
       .then(function success(response) {
         console.log('success');
         console.log(response);
+        this.roles = response.data.roles;
       }, function error(response) {
         console.log('error');
         console.log(response);
