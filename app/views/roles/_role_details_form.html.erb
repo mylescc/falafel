@@ -5,7 +5,13 @@
         <label><input type="checkbox" ng-model='ctrl.currentRole.permanent' id="permanent" value="permanent"> Permanent</label></div>
         <div class="form-group">
           <label for='minSalary'>Minimum Annual Salary</label>
-          <input id='minSalary' ng-model='ctrl.currentRole.min_salary' class="form-control" type='number' min="0" max="9999999" />
+          <input  id='minSalary'
+                  ng-model='ctrl.currentRole.min_salary'
+                  class="form-control"
+                  type='number'
+                  min="0"
+                  max="9999999"
+                  ng-required="ctrl.currentRole.permanent" />
         </div>
         <div class="form-inline">
           <div class="form-group">
@@ -15,8 +21,11 @@
                       ng-model='ctrl.currentRole.permanent_postcode'
                       class="form-control"
                       type="text"
+                      ng-required="ctrl.currentRole.permanent"
                       maxlength="8" />
-              <select ng-model='ctrl.currentRole.permanent_role_distance_id' class="form-control">
+              <select ng-model='ctrl.currentRole.permanent_role_distance_id'
+                      class="form-control"
+                      ng-required="ctrl.currentRole.permanent">
                   <option ng-if='!ctrl.currentRole.permanent_role_distance_id'
                   value='' selected disabled>
                     Range
@@ -32,6 +41,7 @@
           <label for='permCurrentNotice'>Current Notice Period</label>
             <select id='permCurrentNotice'
                     ng-model='ctrl.currentRole.permanent_current_notice_period'
+                    ng-required="ctrl.currentRole.permanent"
                     class="form-control">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -43,6 +53,7 @@
           <label for='permTravelWillingness'>Willing to travel with work</label>
             <select id='permTravelWillingness'
                     ng-model='ctrl.currentRole.permanent_role_travel_willingness_option_id'
+                    ng-required="ctrl.currentRole.permanent"
                     class="form-control">
               <option ng-if='!ctrl.currentRole.permanent_role_travel_willingness_option_id'
                       value='' selected disabled>
@@ -56,6 +67,7 @@
         <div class="form-group">
           <label for='numPermRoles'>Number of permanent roles in the last 5 years</label>
           <input  id='numPermRoles'
+                  ng-required="ctrl.currentRole.permanent"
                   ng-model='ctrl.currentRole.num_permanent_roles'
                   class="form-control" type="number" min="0" max="100" />
         </div>
@@ -68,6 +80,7 @@
           <label for='minDayRate'>Minimum Day Rate</label>
           <input  id='minDayRate'
                   ng-model='ctrl.currentRole.min_day_rate'
+                  ng-required="ctrl.currentRole.contractor"
                   class="form-control"
                   type="number" min="0" max="9999999" />
         </div>
@@ -78,9 +91,12 @@
               <input  id='contractPrefLocation'
                       ng-model='ctrl.currentRole.contract_postcode'
                       class="form-control"
-                      type="text" />
+                      type="text"
+                      ng-required="ctrl.currentRole.contractor"
+                      maxlength="8" />
               <select ng-model='ctrl.currentRole.contract_role_distance_id'
-                      class="form-control">
+                      class="form-control"
+                      ng-required="ctrl.currentRole.contractor">
                   <option ng-if='!ctrl.currentRole.contract_role_distance_id'
                           value='' selected disabled>
                     Range
@@ -96,6 +112,7 @@
         <label for='contractCurrentNotice'>Current Notice Period</label>
             <select id="contractCurrentNotice"
                     ng-model='ctrl.currentRole.contractor_current_notice_period'
+                    ng-required="ctrl.currentRole.contractor"
                     class="form-control">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -126,7 +143,8 @@
           <label for='contractTravelWillingness'>Willing to travel with work</label>
           <select id='contractTravelWillingness'
                   ng-model='ctrl.currentRole.contract_role_travel_willingness_option_id'
-                  class="form-control">
+                  class="form-control"
+                  ng-required="ctrl.currentRole.contractor">
             <option ng-if='!ctrl.currentRole.contract_role_travel_willingness_option_id'
                     value='' selected disabled>
               %
@@ -141,12 +159,14 @@
           <input  id='numContracts'
                   ng-model='ctrl.currentRole.num_contracts'
                   class="form-control"
+                  ng-required="ctrl.currentRole.contractor"
                   type="number" min="0" max="100" />
         </div>
         <div class="form-group">
           <label for='numContractsExtensions'>Number of contract extensions in the last 5 years</label>
           <input  id='numContractsExtensions'
                   ng-model='ctrl.currentRole.num_extensions'
+                  ng-required="ctrl.currentRole.contractor"
                   class="form-control"
                   type="number" min="0" max="100" />
         </div>
