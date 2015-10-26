@@ -1,0 +1,20 @@
+ul.sortable-list
+{
+  padding: 0px;
+  li
+  {
+    cursor:move;
+    padding: 10px;
+    list-style: none;
+    border: 1px solid #CCC;
+    width: 300px;
+    margin-bottom: 5px;
+    background-color: #FFF;
+    span.drag-handle
+    {
+      padding-right: 10px;
+    }
+  }
+
+
+}
