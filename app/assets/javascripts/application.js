@@ -2,8 +2,10 @@
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery-ui
 //= require angular
 //= require angularui
+//= require sortable
 //= require ng-rails-csrf
 //= require turbolinks
 //= require_tree .

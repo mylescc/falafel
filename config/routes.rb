@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :user_experience_industries, only: [:create]
   resources :user_experience_management_skills, only: [:create]
 
+  resources :competencies, only: [:index] do
+    collection { post :reorder }
+  end
+
   controller :roles do
     get   'roles/show'     => :show
     patch 'roles/update'   => :update

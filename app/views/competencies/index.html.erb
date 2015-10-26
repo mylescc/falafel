@@ -1,0 +1,9 @@
+<h2>Competencies</h2>
+<div ng-controller='CompetenciesController'>
+  <ul ui-sortable='sortableOptions' ng-model='userCompetencies' class='sortable-list'>
+    <li ng-repeat='uc in userCompetencies'>
+      <span class="glyphicon glyphicon-align-justify drag-handle" aria-hidden="true"></span>
+      {{uc.competency}}
+    </li>
+  </ul>
+</div>
