@@ -1,0 +1,121 @@
+<h2>Experience</h2>
+<h3>Roles</h3>
+<%- if @experience.roles.count > 0 -%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Primary Activity</th>
+        <th>Years Experience</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @experience.roles.each do |role| %>
+        <tr>
+          <td><%= role.name %></td>
+          <td><%= role.primary_activity%></td>
+          <td><%= role.years_experience%></td>
+          <td></td>
+        </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+<%- end -%>
+
+<%= form_for UserExperienceRole.new, html: {class: 'form-inline'} do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.select :primary_activity, options_for_select(UserExperienceRole.primary_activities.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
+  </div>
+  <div class="form-group">
+    <%= f.select :years_experience, options_for_select(UserExperienceRole.years_experiences.keys), {prompt: 'Please select...'}, {class: 'form-control'}%>
+  </div>
+  <button class="btn btn-default" type="submit">
+    Add Role
+  </button>
+<%- end -%>
+
+<h3>Industry</h3>
+<%- if @experience.industries.count > 0 -%>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Industry</th>
+      <th>Primary Activity</th>
+      <th>Years Experience</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @experience.industries.each do |industry| %>
+      <tr>
+        <td><%= industry.industry %></td>
+        <td><%= industry.primary_activity%></td>
+        <td><%= industry.years_experience%></td>
+        <td></td>
+      </tr>
+    <%- end -%>
+  </tbody>
+</table>
+<%- end -%>
+
+<%= form_for UserExperienceIndustry.new, html: {class: 'form-inline'} do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <%= f.select :industry, options_for_select(UserExperienceIndustry.industries.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
+  </div>
+  <div class="form-group">
+    <%= f.select :primary_activity, options_for_select(UserExperienceIndustry.primary_activities.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
+  </div>
+  <div class="form-group">
+    <%= f.select :years_experience, options_for_select(UserExperienceIndustry.years_experiences.keys), {prompt: 'Please select...'}, {class: 'form-control'}%>
+  </div>
+  <button class="btn btn-default" type="submit">
+    Add Role
+  </button>
+<%- end -%>
+
+
+<h3>Management Skills</h3>
+<%- if @experience.management_skills.count > 0 -%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Industry</th>
+        <th>Primary Activity</th>
+        <th>Years Experience</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @experience.management_skills.each do |management_skill| %>
+      <tr>
+        <td><%= management_skill.industry %></td>
+        <td><%= management_skill.primary_activity%></td>
+        <td><%= management_skill.years_experience%></td>
+        <td></td>
+      </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+<%- end -%>
+
+<%= form_for UserExperienceManagementSkill.new, html: {class: 'form-inline'} do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <%= f.select :industry, options_for_select(UserExperienceManagementSkill.industries.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
+  </div>
+  <div class="form-group">
+    <%= f.select :primary_activity, options_for_select(UserExperienceManagementSkill.primary_activities.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
+  </div>
+  <div class="form-group">
+    <%= f.select :years_experience, options_for_select(UserExperienceManagementSkill.years_experiences.keys), {prompt: 'Please select...'}, {class: 'form-control'}%>
+  </div>
+  <button class="btn btn-default" type="submit">
+    Add Role
+  </button>
+<%- end -%>
