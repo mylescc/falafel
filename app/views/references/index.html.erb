@@ -1,0 +1,49 @@
+<div ng-controller='ReferencesController'>
+  <h2>References</h2>
+  <div id="add-reference-form" ng-init="formVisible=!<%=@reference.errors.empty?%>" ng-show='formVisible'>
+    <h3>Request New Verification</h3>
+    <%= simple_form_for @reference, html: { class: 'form-vertical' } do |f| %>
+      <%= f.input :referee_first_name, label: 'First Name' %>
+      <%= f.input :referee_last_name, label: 'Last Name' %>
+      <%= f.input :referee_email, label: 'Email' %>
+      <%= f.input :referee_email_text, label: 'Message', input_html: {rows: 8} %>
+      <div class='form-button-container'>
+        <%= f.button :submit, class: 'btn-primary', value: 'Send Request' %>
+        <a class='btn btn-link' ng-click='formVisible = false'>
+          Cancel
+        </a>
+      </div>
+    <%- end -%>
+  </div>
+  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Request Profile Verification
+  </button>
+  <div class="clearfix"></div>
+  <%- unless @references.empty? %>
+    <div id="references" class='clearfix'>
+      <%- @references.each do |ref| %>
+        <div class="reference col-md-4">
+          <%= image_tag 'referee_placeholder.png', class: 'referee' %>
+          <div>
+            <h4><%= ref.referee_first_name%> <%= ref.referee_last_name%></h4>
+            <p>
+              <span class="glyphicon glyphicon-remove"></span>
+              Verified Experience
+            </p>
+            <p>
+              <span class="glyphicon glyphicon-remove"></span>
+              Verified Competencies
+            </p>
+            <%= form_for :reference, url: send_reminder_email_reference_path(ref.id) do |f|%>
+              <%= f.button :button, class: 'btn-default btn' do%>
+                Nudge to Complete
+              <%-end-%>
+
+            <%- end -%>
+
+          </div>
+        </div>
+      <%- end -%>
+    </div>
+  <%- end -%>
+</div>
