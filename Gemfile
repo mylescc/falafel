@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'simple_form', '~> 3.2.0'
 gem 'paperclip', '~> 4.3'
+gem 'valid_email', '~> 0.0.11'
 
 # Heroku
 gem 'rails_12factor', group: :production

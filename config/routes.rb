@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   resources :qualifications, only: [:index, :create]
   resources :achievements, only: [:index, :create]
+  resources :references, only: [:index, :create] do
+    member { post :send_reminder_email }
+  end
 
   controller :roles do
     get   'roles/show'     => :show
