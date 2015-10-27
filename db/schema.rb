@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20151027093317) do
     t.datetime "updated_at"
   end
 
+  create_table "qualifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "level"
+    t.string   "organisation"
+    t.integer  "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "role_distances", force: :cascade do |t|
     t.integer "distance"
     t.string  "label"

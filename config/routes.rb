@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     collection { post :reorder }
   end
 
+  resources :qualifications, only: [:index, :create]
+
   controller :roles do
     get   'roles/show'     => :show
     patch 'roles/update'   => :update

@@ -1,0 +1,38 @@
+<div ng-controller='QualificationsController'>
+  <h2>Qualifications</h2>
+  <div id="add-qualification-form" ng-init="formVisible=!<%=@qualification.errors.empty?%>" ng-show='formVisible'>
+    <h3>Add Qualification</h3>
+    <%= simple_form_for @qualification, html: { class: 'form-vertical' } do |f| %>
+      <%= f.input :level, collection: Qualification.levels.keys, prompt: 'Select qualification...' %>
+      <%= f.input :organisation %>
+      <%= f.input :grade, collection: Qualification.grades.keys, prompt: 'Select grade...' %>
+      <div class='form-button-container'>
+        <%= f.button :submit, value: 'Add', class: 'btn btn-primary' %>
+        <a class: "btn btn-link", ng-click='formVisible = false'>Cancel</a>
+      </div>
+    <%- end -%>
+  </div>
+  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Add New Qualification
+  </button>
+  <%- unless @qualifications.empty? %>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Qualification</th>
+          <th>Organisation</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @qualifications.each do |qual| %>
+          <tr>
+            <td><%= qual.level %></td>
+            <td><%= qual.organisation %></td>
+            <td><%= qual.grade %></td>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  <%- end -%>
+</div>
