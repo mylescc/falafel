@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :qualifications, only: [:index, :create]
+  resources :achievements, only: [:index, :create]
 
   controller :roles do
     get   'roles/show'     => :show

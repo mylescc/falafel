@@ -1,0 +1,43 @@
+<div ng-controller='AchievementsController'>
+  <h2>Achievements</h2>
+  <div id="add-achievement-form" ng-init="formVisible=!<%=@achievement.errors.empty?%>" ng-show='formVisible'>
+    <h3>Add Achievement</h3>
+    <%= simple_form_for @achievement, html: { class: 'form-vertical' } do |f| %>
+      <%= f.input :title %>
+      <%= f.input :description, as: :text%>
+      <%= f.input :link %>
+      <%= f.input :attachment, as: :file %>
+      <div class='form-button-container'>
+        <%= f.button :submit, class: 'btn-primary'%>
+        <a class='btn btn-link' ng-click='formVisible = false'>
+          Cancel
+        </a>
+      </div>
+    <%- end -%>
+  </div>
+  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Add New Achievement
+  </button>
+  <%- unless @achievements.empty? %>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Link</th>
+          <th>File</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @achievements.each do |ach| %>
+          <tr>
+            <td><%= ach.title %></td>
+            <td><%= ach.description %></td>
+            <td><%= link_to ach.link, ach.link%></td>
+            <td><%= (link_to 'Download Attachment', ach.attachment.url) unless ach.attachment.blank? %></td>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  <%- end -%>
+</div>
