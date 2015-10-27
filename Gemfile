@@ -24,6 +24,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'simple_form', '~> 3.2.0'
+
 # Heroku
 gem 'rails_12factor', group: :production
 
