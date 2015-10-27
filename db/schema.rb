@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027093317) do
+ActiveRecord::Schema.define(version: 20151027122001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "link"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
+  add_index "achievements", ["user_id"], name: "index_achievements_on_user_id", using: :btree
 
   create_table "personal_details", force: :cascade do |t|
     t.string   "name"
