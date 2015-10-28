@@ -1,4 +1,7 @@
 <div ng-controller='QualificationsController'>
+  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Add New Qualification
+  </button>
   <h2>Qualifications</h2>
   <div id="add-qualification-form" ng-init="formVisible=!<%=@qualification.errors.empty?%>" ng-show='formVisible'>
     <h3>Add Qualification</h3>
@@ -12,9 +15,6 @@
       </div>
     <%- end -%>
   </div>
-  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
-    Add New Qualification
-  </button>
   <%- unless @qualifications.empty? %>
     <table class='table'>
       <thead>

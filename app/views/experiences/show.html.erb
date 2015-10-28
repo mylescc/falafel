@@ -23,21 +23,17 @@
   </table>
 <%- end -%>
 
-<%= form_for UserExperienceRole.new, html: {class: 'form-inline'} do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <div class="form-group">
-    <%= f.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.select :primary_activity, options_for_select(UserExperienceRole.primary_activities.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
-  </div>
-  <div class="form-group">
-    <%= f.select :years_experience, options_for_select(UserExperienceRole.years_experiences.keys), {prompt: 'Please select...'}, {class: 'form-control'}%>
-  </div>
-  <button class="btn btn-default" type="submit">
-    Add Role
-  </button>
-<%- end -%>
+<div class="row">
+  <%= simple_form_for UserExperienceRole.new, html: {class: 'form-inline experience-form'} do |f| %>
+    <%= f.input :user_id, as: :hidden, value: current_user.id %>
+    <%= f.input :name, wrapper_html: {class: 'col-md-3'}, label: false, placeholder: 'Role Name...' %>
+    <%= f.input :primary_activity, wrapper_html: {class: 'col-md-3'}, label: false, collection: UserExperienceRole.primary_activities.keys, prompt: 'Primary Activity...' %> 
+    <%= f.input :years_experience, wrapper_html: {class: 'col-md-3'},label: false, collection: UserExperienceRole.years_experiences.keys, prompt: 'Years Experience...'%>
+    <div class="form-group col-md-3">
+      <%= f.submit 'Add Role', class: 'btn btn-primary col-md-12'%>
+    </div>
+  <%- end -%>
+</div>
 
 <h3>Industry</h3>
 <%- if @experience.industries.count > 0 -%>
@@ -63,22 +59,17 @@
 </table>
 <%- end -%>
 
-<%= form_for UserExperienceIndustry.new, html: {class: 'form-inline'} do |f| %>
+<div class="row">
+<%= simple_form_for UserExperienceIndustry.new, html: {class: 'form-inline experience-form'} do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <div class="form-group">
-    <%= f.select :industry, options_for_select(UserExperienceIndustry.industries.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
+  <%= f.input :industry, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceIndustry.industries.keys, prompt: 'Industry...' %> 
+  <%= f.input :primary_activity, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceIndustry.primary_activities.keys, prompt: 'Primary Activity...'  %> 
+  <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-3'},  collection: UserExperienceIndustry.years_experiences.keys, prompt: 'Years Experience...' %>
+  <div class="form-group col-md-3">
+    <%= f.submit 'Add Industry', class: 'btn btn-primary col-md-12' %>
   </div>
-  <div class="form-group">
-    <%= f.select :primary_activity, options_for_select(UserExperienceIndustry.primary_activities.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
-  </div>
-  <div class="form-group">
-    <%= f.select :years_experience, options_for_select(UserExperienceIndustry.years_experiences.keys), {prompt: 'Please select...'}, {class: 'form-control'}%>
-  </div>
-  <button class="btn btn-default" type="submit">
-    Add Role
-  </button>
 <%- end -%>
-
+</div>
 
 <h3>Management Skills</h3>
 <%- if @experience.management_skills.count > 0 -%>
@@ -104,18 +95,14 @@
   </table>
 <%- end -%>
 
-<%= form_for UserExperienceManagementSkill.new, html: {class: 'form-inline'} do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <div class="form-group">
-    <%= f.select :industry, options_for_select(UserExperienceManagementSkill.industries.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
-  </div>
-  <div class="form-group">
-    <%= f.select :primary_activity, options_for_select(UserExperienceManagementSkill.primary_activities.keys), {prompt: 'Please select...'}, {class: 'form-control'}  %> 
-  </div>
-  <div class="form-group">
-    <%= f.select :years_experience, options_for_select(UserExperienceManagementSkill.years_experiences.keys), {prompt: 'Please select...'}, {class: 'form-control'}%>
-  </div>
-  <button class="btn btn-default" type="submit">
-    Add Role
-  </button>
-<%- end -%>
+<div class="row">
+  <%= simple_form_for UserExperienceManagementSkill.new, html: {class: 'form-inline experience-form'} do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.input :industry, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceManagementSkill.industries.keys, prompt: 'Please select...' %> 
+    <%= f.input :primary_activity, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceManagementSkill.primary_activities.keys, prompt: 'Please select...' %> 
+    <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceManagementSkill.years_experiences.keys, prompt: 'Please select...' %>
+    <div class="form-group col-md-3">
+      <%= f.submit 'Add Management Skill', class: 'btn btn-primary col-md-12' %>
+    </div>
+  <%- end -%>
+</div>

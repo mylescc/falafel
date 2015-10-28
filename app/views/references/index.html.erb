@@ -1,4 +1,7 @@
 <div ng-controller='ReferencesController'>
+  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Request Profile Verification
+  </button>
   <h2>References</h2>
   <div id="add-reference-form" ng-init="formVisible=!<%=@reference.errors.empty?%>" ng-show='formVisible'>
     <h3>Request New Verification</h3>
@@ -15,9 +18,6 @@
       </div>
     <%- end -%>
   </div>
-  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
-    Request Profile Verification
-  </button>
   <div class="clearfix"></div>
   <%- unless @references.empty? %>
     <div id="references" class='clearfix'>

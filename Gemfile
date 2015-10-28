@@ -28,6 +28,8 @@ gem 'simple_form', '~> 3.2.0'
 gem 'paperclip', '~> 4.3'
 gem 'valid_email', '~> 0.0.11'
 
+gem 'bootswatch-rails', '~>3.3.5'
+
 # Heroku
 gem 'rails_12factor', group: :production
 

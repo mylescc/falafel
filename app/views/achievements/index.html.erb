@@ -1,4 +1,7 @@
 <div ng-controller='AchievementsController'>
+  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Add New Achievement
+  </button>
   <h2>Achievements</h2>
   <div id="add-achievement-form" ng-init="formVisible=!<%=@achievement.errors.empty?%>" ng-show='formVisible'>
     <h3>Add Achievement</h3>
@@ -15,9 +18,6 @@
       </div>
     <%- end -%>
   </div>
-  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
-    Add New Achievement
-  </button>
   <%- unless @achievements.empty? %>
     <table class='table'>
       <thead>
