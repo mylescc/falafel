@@ -1,6 +1,6 @@
 class UserExperienceRolesController < ApplicationController
   def create
-    user_experience_role = UserExperienceRole.new(user_experience_roles_params)
+    user_experience_role = UserExperienceRole.new(user_experience_roles_params.merge(user_id: current_user.id))
     unless user_experience_role.save
       flash[:alert] = "There was a problem saving your role. Please try again and ensure all fields are completed"
     end
