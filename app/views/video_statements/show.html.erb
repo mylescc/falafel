@@ -1,0 +1,70 @@
+<script src='//cameratag.com/api/v6/js/cameratag.js' type='text/javascript'></script>
+<div ng-controller='VideoStatementsController'>
+  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Record A Video
+  </button>
+
+  <h2>Video Statement</h2>
+  <div ng-show='!formVisible'>
+    <%- if @video_statement -%>
+      <video id='rando' data-uuid='["<%=@video_statement.uuid %>"]'></video>
+    <%- else -%>
+      <div ng-init="formVisible=true"></div>
+    <%- end -%>
+  </div>
+
+  <div id="add-video_statement-form" ng-init="" ng-show='formVisible'>
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Record Your Video</h3>
+        <%= form_tag video_statement_path, id: 'camera_form', method: :post do%>
+          <camera id='VideoStatementCamera' data-app-id='a-03050ce0-606f-0133-7948-22000b789ce2'></camera>
+        <%- end -%>
+        <div class="form-button-container">
+          <a ng-click="formVisible = false">
+            Cancel
+          </a>
+        </div>
+      </div>
+      <div id="video-guide-container" class="col-md-7">
+        <h3>Guide</h3>
+        <p>
+          Time limit: 45 seconds
+        </p>
+        <h4>
+          Describe your core professional skill set and titles
+        </h4>
+        <p>
+          "My name is Bob, I'm a Prince 2 qualified Applications Project & Programme Manager, specialising in the delivery of off the shelf packages in to global corporations"
+        </p>
+        <h4>
+          Describe type of work interested in
+        </h4>
+        <p>
+          "I'm interested in contract PM work in London within global, commercial sector companies"
+        </p>
+        <h4>
+          Describe your top 3 attributes
+        </h4>
+        <p>
+          "My top 3 attributes are stakeholder engagement, planning and vendor management"
+        </p>
+        <h4>
+          What do your colleagues say about you
+        </h4>
+        <p>
+          "I'm often described as being very delivered focused with a personable style"
+        </p>
+      </div>
+    </div>
+    <br/>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<script type="text/javascript">
+$(function(){
+  CameraTag.observe("VideoStatementCamera", "published", function(){
+    $("#camera_form").submit();
+  });
+});
+</script>
