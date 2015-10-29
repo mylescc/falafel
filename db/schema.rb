@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027134635) do
+ActiveRecord::Schema.define(version: 20151029142043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,18 @@ ActiveRecord::Schema.define(version: 20151027134635) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "video_statements", force: :cascade do |t|
+    t.string   "url"
+    t.string   "uuid"
+    t.string   "thumb_url"
+    t.string   "small_thumb_url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "video_statements", ["user_id"], name: "index_video_statements_on_user_id", using: :btree
 
   add_foreign_key "personal_details", "users"
   add_foreign_key "roles", "users"
