@@ -36,7 +36,15 @@ class PersonalDetailsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:personal_detail).permit(:name, :email, :phone, :postcode)
+    params.require(:personal_detail).permit(
+      :name,
+      :email,
+      :phone,
+      :postcode,
+      :uk_citizen,
+      :eu_citizen,
+      :photo
+    )
   end
 
   def load_details
