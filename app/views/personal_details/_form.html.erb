@@ -1,7 +1,7 @@
 <h2>Basic Details</h2>
 <hr/>
 <p>Note about basic details and why you need to complete</p>
-<%= form_for @details do |f| %>
+<%= form_for @details, html: { multipart: true } do |f| %>
   <h3>Personal</h3>
   <div class="form-group">
     <%= f.label :name %>
@@ -23,8 +23,22 @@
     <%= f.phone_field :phone, class: 'form-control' %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :uk_citizen %>
+    <%= f.check_box :uk_citizen, class: 'form-control' %>
+    <%= f.label :eu_citizen %>
+    <%= f.check_box :eu_citizen, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <% if @details.photo %>
+      <%= image_tag @details.photo.url(:thumb) %>
+    <% end %>
+    <%= f.file_field :photo %>
+  </div>
+
   <div class='form-button-container'>
-    <%= f.submit 'Submit',  class: 'btn btn-primary' %>
+    <%= f.submit 'Save',  class: 'btn btn-primary' %>
   </div>
 
 <% end %>
