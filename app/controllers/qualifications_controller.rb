@@ -21,7 +21,7 @@ class QualificationsController < ApplicationController
 
   def qualification_params
     params.require(:qualification).permit(
-      :level, :organisation, :grade, :user_id
+      :level, :institution, :grade, :user_id, :qualification_extra_description
     )
   end
 

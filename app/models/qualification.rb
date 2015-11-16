@@ -1,7 +1,7 @@
 class Qualification < ActiveRecord::Base
   belongs_to :user
 
-  validates :user, :level, :organisation, :grade, presence: true
+  validates :user, :level, :institution, :grade, presence: true
 
   enum level: {
     'GCSE' => 1,

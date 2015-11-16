@@ -31,8 +31,13 @@
       <tbody>
         <%- @qualifications.each do |qual| %>
           <tr>
-            <td><%= qual.level %></td>
-            <td><%= qual.organisation %></td>
+            <td>
+              <%= qual.level %>
+              <% if qual.qualification_extra_description %>
+                <%= "- #{qual.qualification_extra_description}" %>
+              <% end %>
+            </td>
+            <td><%= qual.institution %></td>
             <td><%= qual.grade %></td>
           </tr>
         <%- end -%>
