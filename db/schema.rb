@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116203742) do
+ActiveRecord::Schema.define(version: 20151117122514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title"
@@ -131,13 +130,21 @@ ActiveRecord::Schema.define(version: 20151116203742) do
 
   create_table "user_experience_roles", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "name"
     t.integer  "primary_activity"
     t.integer  "years_experience"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "secondary_activity"
+    t.string   "other_primary_activity"
+    t.string   "other_secondary_activity"
+    t.integer  "expertise"
+    t.integer  "company"
+    t.boolean  "in_last_five_years"
   end
 
+  add_index "user_experience_roles", ["company"], name: "index_user_experience_roles_on_company", using: :btree
+  add_index "user_experience_roles", ["expertise"], name: "index_user_experience_roles_on_expertise", using: :btree
+  add_index "user_experience_roles", ["secondary_activity"], name: "index_user_experience_roles_on_secondary_activity", using: :btree
   add_index "user_experience_roles", ["user_id"], name: "index_user_experience_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

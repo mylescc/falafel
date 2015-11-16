@@ -4,32 +4,69 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
         <th>Primary Activity</th>
+        <th>Secondary Activity</th>
         <th>Years Experience</th>
-        <th></th>
+        <th>Expertise</th>
+        <th>Companies</th>
+        <th>Last 5 Years?</th>
       </tr>
     </thead>
     <tbody>
       <%- @experience.roles.each do |role| %>
         <tr>
-          <td><%= role.name %></td>
-          <td><%= role.primary_activity%></td>
+          <td><%= role.derived_primary_activity%></td>
+          <td><%= role.derived_secondary_activity%></td>
           <td><%= role.years_experience%></td>
-          <td></td>
+          <td><%= role.expertise%></td>
+          <td><%= role.company%></td>
+          <td>
+            <%-if role.in_last_five_years? -%>
+              <span class="glyphicon glyphicon-ok text-success"></span>
+            <%- end -%>
+          </td>
         </tr>
       <%- end -%>
     </tbody>
   </table>
 <%- end -%>
 
-<div class="row">
+<div ng-controller='UserExperienceRolesController' 
+    class="row"
+    ng-init='primaryActivities = <%=UserExperienceRole.primary_activities.to_json%>; 
+    secondaryActivityMap = <%=UserExperienceRole.mapped_secondary_activities.to_json%>'}>
   <%= simple_form_for UserExperienceRole.new, html: {class: 'form-inline experience-form'} do |f| %>
-    <%= f.input :user_id, as: :hidden, value: current_user.id %>
-    <%= f.input :name, wrapper_html: {class: 'col-md-3'}, label: false, placeholder: 'Role Name...' %>
-    <%= f.input :primary_activity, wrapper_html: {class: 'col-md-3'}, label: false, collection: UserExperienceRole.primary_activities.keys, prompt: 'Primary Activity...' %> 
-    <%= f.input :years_experience, wrapper_html: {class: 'col-md-3'},label: false, collection: UserExperienceRole.years_experiences.keys, prompt: 'Years Experience...'%>
-    <div class="form-group col-md-3">
+    <%= f.input :primary_activity, wrapper_html: {class: 'col-md-2', 'ng-hide' => 'otherPrimarySelected'},
+      input_html: {'ng-model' => 'selectedPrimaryActivity', 'ng-disabled' => 'otherPrimarySelected'}, label: false,
+      collection: UserExperienceRole.primary_activities.keys.push("Other..."), prompt: 'Primary Activity...' %>
+    <div class="form-group col-md-2" ng-show='otherPrimarySelected'>
+      <div class="input-group">
+        <input id='user_experience_role_other_primary_activity', name='user_experience_role[other_primary_activity]',
+          class="form-control" type="text," placeholder="Primary Activity...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="cancelOtherActivities()">X</button>
+        </span>
+      </div>
+    </div>
+    <%= f.input :secondary_activity, wrapper_html: {class: 'col-md-2', 'ng-show' => 'secondaryActivitiesVisible'}, 
+      label: false do -%>
+      <%= f.select :secondary_activity, [], {prompt: 'Secondary Activity...'}, 
+        {class: 'form-control select', 'ng-model'  => 'selectedSecondaryActivity', 'ng-disabled' => 'otherPrimarySelected'} do %>
+        <option ng-repeat="sa in availableSecondaryActivities" value="{{sa}}">{{sa}}</option>
+      <%- end -%>
+    <%- end -%>
+    <%= f.input :other_secondary_activity, wrapper_html: {class: 'col-md-2', 
+                                                          'ng-show' => 'otherPrimarySelected'}, 
+      input_html: {}, label: false, placeholder: 'Secondary Activity...'%>
+    <%= f.input :years_experience, wrapper_html: {class: 'col-md-2'},label: false, 
+      collection: UserExperienceRole.years_experiences.keys, prompt: 'Years Experience...'%>
+    <%= f.input :expertise, wrapper_html: {class: 'col-md-2'},label: false, 
+      collection: UserExperienceRole.expertises.keys, prompt: 'Expertise...'%>
+    <%= f.input :company, wrapper_html: {class: 'col-md-2'},label: false, 
+      collection: UserExperienceRole.companies.keys, prompt: 'Companies...'%>
+    <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
+
+    <div class="form-group col-md-2">
       <%= f.submit 'Add Role', class: 'btn btn-primary col-md-12'%>
     </div>
   <%- end -%>
@@ -62,9 +99,12 @@
 <div class="row">
 <%= simple_form_for UserExperienceIndustry.new, html: {class: 'form-inline experience-form'} do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.input :industry, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceIndustry.industries.keys, prompt: 'Industry...' %> 
-  <%= f.input :primary_activity, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceIndustry.primary_activities.keys, prompt: 'Primary Activity...'  %> 
-  <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-3'},  collection: UserExperienceIndustry.years_experiences.keys, prompt: 'Years Experience...' %>
+  <%= f.input :industry, label: false, wrapper_html: {class: 'col-md-3'}, 
+    collection: UserExperienceIndustry.industries.keys, prompt: 'Industry...' %> 
+  <%= f.input :primary_activity, label: false, wrapper_html: {class: 'col-md-3'}, 
+    collection: UserExperienceIndustry.primary_activities.keys, prompt: 'Primary Activity...'  %> 
+  <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-3'},  
+    collection: UserExperienceIndustry.years_experiences.keys, prompt: 'Years Experience...' %>
   <div class="form-group col-md-3">
     <%= f.submit 'Add Industry', class: 'btn btn-primary col-md-12' %>
   </div>
@@ -98,9 +138,12 @@
 <div class="row">
   <%= simple_form_for UserExperienceManagementSkill.new, html: {class: 'form-inline experience-form'} do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.input :industry, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceManagementSkill.industries.keys, prompt: 'Please select...' %> 
-    <%= f.input :primary_activity, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceManagementSkill.primary_activities.keys, prompt: 'Please select...' %> 
-    <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-3'}, collection: UserExperienceManagementSkill.years_experiences.keys, prompt: 'Please select...' %>
+    <%= f.input :industry, label: false, wrapper_html: {class: 'col-md-3'}, 
+      collection: UserExperienceManagementSkill.industries.keys, prompt: 'Please select...' %> 
+    <%= f.input :primary_activity, label: false, wrapper_html: {class: 'col-md-3'},
+      collection: UserExperienceManagementSkill.primary_activities.keys, prompt: 'Please select...' %> 
+    <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-3'}, 
+      collection: UserExperienceManagementSkill.years_experiences.keys, prompt: 'Please select...' %>
     <div class="form-group col-md-3">
       <%= f.submit 'Add Management Skill', class: 'btn btn-primary col-md-12' %>
     </div>
