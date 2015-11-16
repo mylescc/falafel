@@ -6,8 +6,12 @@
   <div id="add-qualification-form" ng-init="formVisible=!<%=@qualification.errors.empty?%>" ng-show='formVisible'>
     <h3>Add Qualification</h3>
     <%= simple_form_for @qualification, html: { class: 'form-vertical' } do |f| %>
-      <%= f.input :level, collection: Qualification.levels.keys, prompt: 'Select qualification...' %>
-      <%= f.input :organisation %>
+      <%= f.input :level, collection: Qualification.levels.keys, prompt: 'Select qualification...',
+         input_html: { "ng-model": "qualification"} %>
+      <div ng-show="qualification == 'Other'">
+        <%= f.input :qualification_extra_description, label: 'Other (Description)' %>
+      </div>
+      <%= f.input :institution %>
       <%= f.input :grade, collection: Qualification.grades.keys, prompt: 'Select grade...' %>
       <div class='form-button-container'>
         <%= f.button :submit, value: 'Add', class: 'btn btn-primary' %>
@@ -22,14 +26,23 @@
           <th>Qualification</th>
           <th>Organisation</th>
           <th>Grade</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <%- @qualifications.each do |qual| %>
           <tr>
-            <td><%= qual.level %></td>
-            <td><%= qual.organisation %></td>
+            <td>
+              <%= qual.level %>
+              <% if qual.qualification_extra_description %>
+                <%= "- #{qual.qualification_extra_description}" %>
+              <% end %>
+            </td>
+            <td><%= qual.institution %></td>
             <td><%= qual.grade %></td>
+            <td class="text-center">
+              <%= link_to "X", qualification_path(qual.id), method: :delete %>
+            </td>
           </tr>
         <%- end -%>
       </tbody>

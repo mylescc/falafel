@@ -16,12 +16,18 @@ class QualificationsController < ApplicationController
     end
   end
 
+  def destroy
+    qualification = Qualification.find(params[:id])
+    qualification.destroy if qualification
+    redirect_to qualifications_path, flash: { notice: 'Qualification deleted' }
+  end
+
 
   private
 
   def qualification_params
     params.require(:qualification).permit(
-      :level, :organisation, :grade, :user_id
+      :level, :institution, :grade, :user_id, :qualification_extra_description
     )
   end
 
