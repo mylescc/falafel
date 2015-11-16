@@ -24,7 +24,7 @@ class Qualification < ActiveRecord::Base
     '2.1' => 6,
     '2.2' => 7,
     '3rd' => 8,
-    'merit' => 9,
-    'distinction' => 10,
+    'Merit' => 9,
+    'Distinction' => 10,
   }
 end

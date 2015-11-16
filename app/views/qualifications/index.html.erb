@@ -6,8 +6,12 @@
   <div id="add-qualification-form" ng-init="formVisible=!<%=@qualification.errors.empty?%>" ng-show='formVisible'>
     <h3>Add Qualification</h3>
     <%= simple_form_for @qualification, html: { class: 'form-vertical' } do |f| %>
-      <%= f.input :level, collection: Qualification.levels.keys, prompt: 'Select qualification...' %>
-      <%= f.input :organisation %>
+      <%= f.input :level, collection: Qualification.levels.keys, prompt: 'Select qualification...',
+         input_html: { "ng-model": "qualification"} %>
+      <div ng-show="qualification == 'Other'">
+        <%= f.input :qualification_extra_description, label: 'Other (Description)' %>
+      </div>
+      <%= f.input :institution %>
       <%= f.input :grade, collection: Qualification.grades.keys, prompt: 'Select grade...' %>
       <div class='form-button-container'>
         <%= f.button :submit, value: 'Add', class: 'btn btn-primary' %>
