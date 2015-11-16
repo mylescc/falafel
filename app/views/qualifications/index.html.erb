@@ -26,6 +26,7 @@
           <th>Qualification</th>
           <th>Organisation</th>
           <th>Grade</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -39,6 +40,9 @@
             </td>
             <td><%= qual.institution %></td>
             <td><%= qual.grade %></td>
+            <td class="text-center">
+              <%= link_to "X", qualification_path(qual.id), method: :delete %>
+            </td>
           </tr>
         <%- end -%>
       </tbody>

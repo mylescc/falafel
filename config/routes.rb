@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     collection { post :reorder }
   end
 
-  resources :qualifications, only: [:index, :create]
+  resources :qualifications, only: [:index, :create, :destroy]
   resources :achievements, only: [:index, :create]
   resources :references, only: [:index, :create] do
     member { post :send_reminder_email }

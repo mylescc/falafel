@@ -16,6 +16,12 @@ class QualificationsController < ApplicationController
     end
   end
 
+  def destroy
+    qualification = Qualification.find(params[:id])
+    qualification.destroy if qualification
+    redirect_to qualifications_path, flash: { notice: 'Qualification deleted' }
+  end
+
 
   private
 
