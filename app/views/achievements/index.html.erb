@@ -24,6 +24,7 @@
           <th>Title</th>
           <th>Link</th>
           <th>File</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +33,9 @@
             <td><%= ach.title %></td>
             <td><%= link_to ach.link, ach.link%></td>
             <td><%= (link_to 'Download Attachment', ach.attachment.url) unless ach.attachment.blank? %></td>
+            <td class="text-center">
+              <%= link_to "X", achievement_path(ach.id), method: :delete %>
+            </td>
           </tr>
         <%- end -%>
       </tbody>
