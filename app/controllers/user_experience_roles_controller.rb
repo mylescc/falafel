@@ -11,7 +11,8 @@ class UserExperienceRolesController < ApplicationController
 
   def user_experience_roles_params
     params.require(:user_experience_role).permit(
-      :user_id, :name, :primary_activity, :years_experience
+      :user_id, :primary_activity, :secondary_activity, :years_experience, :other_primary_activity, :other_secondary_activity,
+      :company, :expertise, :in_last_five_years
     )
   end
 end
