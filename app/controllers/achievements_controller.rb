@@ -16,12 +16,18 @@ class AchievementsController < ApplicationController
     end
   end
 
+  def destroy
+    achievement = Achievement.find(params[:id])
+    achievement.destroy if achievement
+    redirect_to achievements_path, flash: { notice: 'Achievement deleted' }
+  end
+
 
   private
 
   def achievement_params
     params.require(:achievement).permit(
-      :title, :description, :link, :user_id, :attachment
+      :title, :link, :user_id, :attachment
     )
   end
 

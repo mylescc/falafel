@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117122514) do
+ActiveRecord::Schema.define(version: 20151117225403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title"
-    t.string   "description"
     t.string   "link"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -135,11 +135,11 @@ ActiveRecord::Schema.define(version: 20151117122514) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "secondary_activity"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
     t.integer  "expertise"
     t.integer  "company"
     t.boolean  "in_last_five_years"
+    t.string   "other_primary_activity"
+    t.string   "other_secondary_activity"
   end
 
   add_index "user_experience_roles", ["company"], name: "index_user_experience_roles_on_company", using: :btree
