@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20151121181746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title"
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 20151121181746) do
     t.integer  "permanent_role_distance_id"
     t.integer  "contract_role_travel_willingness_option_id"
     t.integer  "permanent_role_travel_willingness_option_id"
+    t.integer  "position"
   end
 
   create_table "user_competencies", force: :cascade do |t|
