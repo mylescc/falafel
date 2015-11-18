@@ -1,178 +1,201 @@
 <form ng-submit="ctrl.saveRoleChanges()">
-    <div class="row">
-      <div class="col-sm-6 role-type-selection-container">
-        <div class="role-type-selection">
-        <label><input type="checkbox" ng-model='ctrl.currentRole.permanent' id="permanent" value="permanent"> Permanent</label></div>
-        <div class="form-group">
-          <label for='minSalary'>Minimum Annual Salary</label>
+<div class="row">
+
+  <!-- Permanant Section -->
+  <div class="col-sm-6 role-type-selection-container">
+    <div class="role-type-selection">
+      <label><input type="checkbox" ng-model='ctrl.currentRole.permanent' id="permanent" value="permanent"> Permanent</label></div>
+
+    <div ng-show="ctrl.currentRole.permanent">
+      <div class="form-group">
+        <label for='minSalary'>Minimum Annual Salary</label>
+        <div class="input-group">
+          <div class="input-group-addon">£</div>
           <input  id='minSalary'
-                  ng-model='ctrl.currentRole.min_salary'
-                  class="form-control"
-                  type='number'
-                  min="0"
-                  max="9999999"
-                  ng-required="ctrl.currentRole.permanent" />
-        </div>
-        <div class="form-inline">
-          <div class="form-group">
-            <label for='permPrefLocation'>Preferred Location</label></br>
-            <p>
-              <input  id='permPrefLocation'
-                      ng-model='ctrl.currentRole.permanent_postcode'
-                      class="form-control"
-                      type="text"
-                      ng-required="ctrl.currentRole.permanent"
-                      maxlength="8" />
-              <select ng-model='ctrl.currentRole.permanent_role_distance_id'
-                      class="form-control"
-                      ng-required="ctrl.currentRole.permanent">
-                  <option ng-if='!ctrl.currentRole.permanent_role_distance_id'
-                  value='' selected disabled>
-                    Range
-                  </option>
-                  <% @role_distances.each do |option| %>
-                    <option value="<%= option.id %>"><%= option.label %></option>
-                  <% end %>
-              </select>
-            </p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for='permCurrentNotice'>Current Notice Period</label>
-            <select id='permCurrentNotice'
-                    ng-model='ctrl.currentRole.permanent_current_notice_period'
-                    ng-required="ctrl.currentRole.permanent"
-                    class="form-control">
-              <option value="1">1 month</option>
-              <option value="2">2 months</option>
-              <option value="3">3 months</option>
-              <option value="4">4 months</option>
-            </select>
-        </div>
-        <div class="form-group">
-          <label for='permTravelWillingness'>Willing to travel with work</label>
-            <select id='permTravelWillingness'
-                    ng-model='ctrl.currentRole.permanent_role_travel_willingness_option_id'
-                    ng-required="ctrl.currentRole.permanent"
-                    class="form-control">
-              <option ng-if='!ctrl.currentRole.permanent_role_travel_willingness_option_id'
-                      value='' selected disabled>
-                %
-              </option>
-              <% @travel_willingness_options.each do |option| %>
-                <option value="<%= option.id %>"><%= option.label %></option>
-              <% end %>
-            </select>
-        </div>
-        <div class="form-group">
-          <label for='numPermRoles'>Number of permanent roles in the last 5 years</label>
-          <input  id='numPermRoles'
-                  ng-required="ctrl.currentRole.permanent"
-                  ng-model='ctrl.currentRole.num_permanent_roles'
-                  class="form-control" type="number" min="0" max="100" />
+               ng-model='ctrl.currentRole.min_salary'
+               class="form-control"
+               type='number'
+               min="0"
+               max="9999999"
+               ng-required="ctrl.currentRole.permanent" />
         </div>
       </div>
-      <div class="col-sm-6 role-type-selection-container">
-        <div class="role-type-selection">
-          <label><input type="checkbox" ng-model='ctrl.currentRole.contractor' id="contract" value="permanent"> Contract</label>
-        </div>
-         <div class="form-group">
-          <label for='minDayRate'>Minimum Day Rate</label>
-          <input  id='minDayRate'
-                  ng-model='ctrl.currentRole.min_day_rate'
-                  ng-required="ctrl.currentRole.contractor"
-                  class="form-control"
-                  type="number" min="0" max="9999999" />
-        </div>
-        <div class="form-inline">
-          <div class="form-group">
-            <label for='contractPrefLocation'>Preferred Location</label>
-            <p>
-              <input  id='contractPrefLocation'
-                      ng-model='ctrl.currentRole.contract_postcode'
-                      class="form-control"
-                      type="text"
-                      ng-required="ctrl.currentRole.contractor"
-                      maxlength="8" />
-              <select ng-model='ctrl.currentRole.contract_role_distance_id'
-                      class="form-control"
-                      ng-required="ctrl.currentRole.contractor">
-                  <option ng-if='!ctrl.currentRole.contract_role_distance_id'
-                          value='' selected disabled>
-                    Range
-                  </option>
-                  <% @role_distances.each do |option| %>
-                    <option value="<%= option.id %>"><%= option.label %></option>
-                  <% end %>
-              </select>
-            </p>
-          </div>
-        </div>
+      <div class="form-inline">
         <div class="form-group">
-        <label for='contractCurrentNotice'>Current Notice Period</label>
-            <select id="contractCurrentNotice"
-                    ng-model='ctrl.currentRole.contractor_current_notice_period'
-                    ng-required="ctrl.currentRole.contractor"
-                    class="form-control">
-              <option value="1">1 month</option>
-              <option value="2">2 months</option>
-              <option value="3">3 months</option>
-              <option value="4">4 months</option>
-            </select>
-        </div>
-        <div class="form-group">
-          <label for='availableDate'>Available date</label>
-          <p class="input-group">
-            <input  id='availableDate'
-                    type="date"
-                    class="form-control"
-                    uib-datepicker-popup
-                    ng-model='ctrl.currentRole.contract_available_at'
-                    is-open="ctrl.calendarStatus.opened"
-                    min-date="ctrl.availableMinDate"
-                    max-date="ctrl.availableMaxDate"
-                    datepicker-options="dateOptions"
-                    ng-required="ctrl.currentRole.contractor"
-                    close-text="Close" />
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-          </p>
-        </div>
-        <div class="form-group">
-          <label for='contractTravelWillingness'>Willing to travel with work</label>
-          <select id='contractTravelWillingness'
-                  ng-model='ctrl.currentRole.contract_role_travel_willingness_option_id'
-                  class="form-control"
-                  ng-required="ctrl.currentRole.contractor">
-            <option ng-if='!ctrl.currentRole.contract_role_travel_willingness_option_id'
-                    value='' selected disabled>
-              %
+          <label for='permPrefLocation'>Preferred Location</label></br>
+          <p>
+          <input  id='permPrefLocation'
+             ng-model='ctrl.currentRole.permanent_postcode'
+             class="form-control"
+             type="text"
+             ng-required="ctrl.currentRole.permanent"
+             maxlength="8" />
+          <select ng-model='ctrl.currentRole.permanent_role_distance_id'
+             class="form-control"
+             ng-required="ctrl.currentRole.permanent">
+            <option ng-if='!ctrl.currentRole.permanent_role_distance_id'
+             value='' selected disabled>
+            Range
             </option>
-            <% @travel_willingness_options.each do |option| %>
+            <% @role_distances.each do |option| %>
               <option value="<%= option.id %>"><%= option.label %></option>
             <% end %>
           </select>
-        </div>
-        <div class="form-group">
-          <label for='numContracts'>Number of contracts in the last 5 years</label>
-          <input  id='numContracts'
-                  ng-model='ctrl.currentRole.num_contracts'
-                  class="form-control"
-                  ng-required="ctrl.currentRole.contractor"
-                  type="number" min="0" max="100" />
-        </div>
-        <div class="form-group">
-          <label for='numContractsExtensions'>Number of contract extensions in the last 5 years</label>
-          <input  id='numContractsExtensions'
-                  ng-model='ctrl.currentRole.num_extensions'
-                  ng-required="ctrl.currentRole.contractor"
-                  class="form-control"
-                  type="number" min="0" max="100" />
+          </p>
         </div>
       </div>
-      <div class="form-button-container">
-        <input type="submit" class="btn btn-primary" value="Save" />
+      <div class="form-group">
+        <label for='permCurrentNotice'>Current Notice Period</label>
+        <select id='permCurrentNotice'
+           ng-model='ctrl.currentRole.permanent_current_notice_period'
+           ng-required="ctrl.currentRole.permanent"
+           class="form-control">
+          <option value="1">1 month</option>
+          <option value="2">2 months</option>
+          <option value="3">3 months</option>
+          <option value="4">4 months</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for='permTravelWillingness'>Willing to travel with work</label>
+        <select id='permTravelWillingness'
+           ng-model='ctrl.currentRole.permanent_role_travel_willingness_option_id'
+           ng-required="ctrl.currentRole.permanent"
+           class="form-control">
+          <option ng-if='!ctrl.currentRole.permanent_role_travel_willingness_option_id'
+           value='' selected disabled>
+          %
+          </option>
+          <% @travel_willingness_options.each do |option| %>
+            <option value="<%= option.id %>"><%= option.label %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for='numPermRoles'>Number of permanent roles in the last 5 years</label>
+        <input  id='numPermRoles'
+           ng-required="ctrl.currentRole.permanent"
+           ng-model='ctrl.currentRole.num_permanent_roles'
+           class="form-control" type="number" min="0" max="100" />
       </div>
     </div>
-  </form>
+  </div>
+
+
+
+
+  <!-- Contract Section -->
+  <div class="col-sm-6 role-type-selection-container">
+    <div class="role-type-selection">
+      <label><input type="checkbox" ng-model='ctrl.currentRole.contractor' id="contract" value="permanent"> Contract</label>
+    </div>
+
+    <div ng-show="ctrl.currentRole.contractor">
+      <div class="form-group">
+        <label for='minDayRate'>Minimum Day Rate</label>
+        <div class="input-group">
+          <div class="input-group-addon">£</div>
+          <input  id='minDayRate'
+               ng-model='ctrl.currentRole.min_day_rate'
+               ng-required="ctrl.currentRole.contractor"
+               class="form-control"
+               type="number" min="0" max="9999999" />
+        </div>
+      </div>
+      <div class="form-inline">
+        <div class="form-group">
+          <label for='contractPrefLocation'>Preferred Location</label>
+          <p>
+          <input  id='contractPrefLocation'
+             ng-model='ctrl.currentRole.contract_postcode'
+             class="form-control"
+             type="text"
+             ng-required="ctrl.currentRole.contractor"
+             maxlength="8" />
+          <select ng-model='ctrl.currentRole.contract_role_distance_id'
+             class="form-control"
+             ng-required="ctrl.currentRole.contractor">
+            <option ng-if='!ctrl.currentRole.contract_role_distance_id'
+             value='' selected disabled>
+            Range
+            </option>
+            <% @role_distances.each do |option| %>
+              <option value="<%= option.id %>"><%= option.label %></option>
+            <% end %>
+          </select>
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for='contractCurrentNotice'>Current Notice Period</label>
+        <select id="contractCurrentNotice"
+                ng-model='ctrl.currentRole.contractor_current_notice_period'
+                ng-required="ctrl.currentRole.contractor"
+                class="form-control">
+          <option value="1">1 month</option>
+          <option value="2">2 months</option>
+          <option value="3">3 months</option>
+          <option value="4">4 months</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for='availableDate'>Available date</label>
+        <p class="input-group">
+        <input  id='availableDate'
+           type="date"
+           class="form-control"
+           uib-datepicker-popup
+           ng-model='ctrl.currentRole.contract_available_at'
+           is-open="ctrl.calendarStatus.opened"
+           min-date="ctrl.availableMinDate"
+           max-date="ctrl.availableMaxDate"
+           datepicker-options="dateOptions"
+           ng-required="ctrl.currentRole.contractor"
+           close-text="Close" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+        </p>
+      </div>
+      <div class="form-group">
+        <label for='contractTravelWillingness'>Willing to travel with work</label>
+        <select id='contractTravelWillingness'
+           ng-model='ctrl.currentRole.contract_role_travel_willingness_option_id'
+           class="form-control"
+           ng-required="ctrl.currentRole.contractor">
+          <option ng-if='!ctrl.currentRole.contract_role_travel_willingness_option_id'
+           value='' selected disabled>
+          %
+          </option>
+          <% @travel_willingness_options.each do |option| %>
+            <option value="<%= option.id %>"><%= option.label %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for='numContracts'>Number of contracts in the last 5 years</label>
+        <input  id='numContracts'
+           ng-model='ctrl.currentRole.num_contracts'
+           class="form-control"
+           ng-required="ctrl.currentRole.contractor"
+           type="number" min="0" max="100" />
+      </div>
+      <div class="form-group">
+        <label for='numContractsExtensions'>Number of contract extensions in the last 5 years</label>
+        <input  id='numContractsExtensions'
+           ng-model='ctrl.currentRole.num_extensions'
+           ng-required="ctrl.currentRole.contractor"
+           class="form-control"
+           type="number" min="0" max="100" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form-button-container">
+      <input type="submit" class="btn btn-primary" value="Save" />
+    </div>
+  </div>
+</div>
+</form>
