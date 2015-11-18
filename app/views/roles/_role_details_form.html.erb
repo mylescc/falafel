@@ -50,10 +50,16 @@
            ng-model='ctrl.currentRole.permanent_current_notice_period'
            ng-required="ctrl.currentRole.permanent"
            class="form-control">
-          <option value="1">1 month</option>
-          <option value="2">2 months</option>
-          <option value="3">3 months</option>
-          <option value="4">4 months</option>
+          <option ng-if='!ctrl.currentRole.permanent_current_notice_period'
+            value='' selected disabled>
+            Select Notice Period
+          </option>
+          <option value="0">Immediate</option>
+          <option value="1">1 week</option>
+          <option value="2">2 weeks</option>
+          <option value="3">3 weeks</option>
+          <option value="4">4 weeks</option>
+          <option value="5">4 weeks+</option>
         </select>
       </div>
       <div class="form-group">
@@ -132,10 +138,16 @@
                 ng-model='ctrl.currentRole.contractor_current_notice_period'
                 ng-required="ctrl.currentRole.contractor"
                 class="form-control">
-          <option value="1">1 month</option>
-          <option value="2">2 months</option>
-          <option value="3">3 months</option>
-          <option value="4">4 months</option>
+          <option ng-if='!ctrl.currentRole.contractor_current_notice_period'
+            value='' selected disabled>
+            Select Notice Period
+          </option>
+          <option value="0">Immediate</option>
+          <option value="1">1 week</option>
+          <option value="2">2 weeks</option>
+          <option value="3">3 weeks</option>
+          <option value="4">4 weeks</option>
+          <option value="5">4 weeks+</option>
         </select>
       </div>
       <div class="form-group">
