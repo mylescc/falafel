@@ -5,11 +5,12 @@
     <thead>
       <tr>
         <th>Role</th>
-        <th>Experience</th
+        <th>Experience</th>
         <th>Years Experience</th>
         <th>Expertise</th>
         <th>Companies</th>
         <th>Last 5 Years?</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
             <%-if role.in_last_five_years? -%>
               <span class="glyphicon glyphicon-ok text-success"></span>
             <%- end -%>
+          </td>
+          <td>
+            <%= button_to "Delete", user_experience_role_path(role.id), method: :delete, class: 'btn btn-danger btn-xs' %>
           </td>
         </tr>
       <%- end -%>

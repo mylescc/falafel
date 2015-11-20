@@ -7,6 +7,13 @@ class UserExperienceRolesController < ApplicationController
     redirect_to experience_path
   end
 
+  def destroy
+    user_experience_role = UserExperienceRole.find(params[:id])
+    user_experience_role.destroy
+    flash[:notice] = 'Role successfully deleted'
+    redirect_to experience_path
+  end
+
   private
 
   def user_experience_roles_params
