@@ -108,7 +108,9 @@
             <span class="glyphicon glyphicon-ok text-success"></span>
           <%- end -%>
         </td>
-        <td></td>
+        <td>
+          <%= button_to "Delete", user_experience_industry_path(industry.id), method: :delete, class: 'btn btn-danger btn-xs' %>
+        </td>
       </tr>
     <%- end -%>
   </tbody>
