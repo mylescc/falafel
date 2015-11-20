@@ -2,26 +2,41 @@
   'use strict';
 
   function UserExperienceRolesController($scope) {
-    $scope.secondaryActivitiesVisible = false;
+
+    $scope.$watch('selectedPrimaryActivity', function(value) {
+      $scope.updateSecondaryActivities();
+      $scope.updatePrimaryVisibilities();
+      $scope.updateSecondaryVisibilities();
+    });
 
     $scope.updateSecondaryActivities = function(){
       $scope.availableSecondaryActivities = $scope.secondaryActivityMap[$scope.selectedPrimaryActivity];
     }
 
-    $scope.$watch('availableSecondaryActivities', function() {
-      $scope.secondaryActivitiesVisible = !!$scope.availableSecondaryActivities;
+    $scope.$watch('selectedSecondaryActivity', function(value){
+      $scope.updateSecondaryVisibilities();
     });
 
-    $scope.$watch('selectedPrimaryActivity', function(){
-      $scope.updateSecondaryActivities();
-      $scope.otherPrimarySelected = $scope.selectedPrimaryActivity == 'Other...';
-    });
+    $scope.updatePrimaryVisibilities = function(){
+      var selectedValue = $scope.selectedPrimaryActivity;
+      $scope.otherPrimaryVisible = selectedValue == 'Other...' 
+    }
 
-    $scope.cancelOtherActivities = function(){
-      $scope.otherPrimarySelected = false;
+    $scope.updateSecondaryVisibilities = function(){
+      var otherVal = 'Other...'
+      var selectedValue = $scope.selectedSecondaryActivity;
+      var otherSelected = selectedValue == otherVal || $scope.selectedPrimaryActivity == otherVal;
+      $scope.secondaryActivitiesVisible = !!$scope.availableSecondaryActivities && !otherSelected; 
+      $scope.otherSecondaryVisible = otherSelected;
+    }
+
+    $scope.cancelOtherPrimaryActivity = function(){
       $scope.selectedPrimaryActivity = '';
-    };
+    }
 
+    $scope.cancelOtherSecondaryActivity = function(){
+      $scope.selectedSecondaryActivity = '';
+    }
   };
 
   UserExperienceRolesController.$inject = ['$scope'];
