@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function UserExperienceRolesController($scope) {
+  function UserExperienceActivitiesController($scope) {
 
     $scope.$watch('selectedPrimaryActivity', function(value) {
       $scope.updateSecondaryActivities();
@@ -39,6 +39,6 @@
     }
   };
 
-  UserExperienceRolesController.$inject = ['$scope'];
-  angular.module('Fused4').controller('UserExperienceRolesController', UserExperienceRolesController);
+  UserExperienceActivitiesController.$inject = ['$scope'];
+  angular.module('Fused4').controller('UserExperienceActivitiesController', UserExperienceActivitiesController);
 })();

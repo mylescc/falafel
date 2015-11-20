@@ -1,5 +1,6 @@
 class UserExperienceRole < ActiveRecord::Base
   include CommonExperienceEnumerations
+  include ActivityMapper
   belongs_to :user
   #validates :user, :primary_activity, presence: true
 
@@ -80,45 +81,24 @@ class UserExperienceRole < ActiveRecord::Base
     'Service Transition' => 48
   }
 
-
-  SECONDARY_ACTIVITY_MAP = {
-    # architect
-    1 => [1, 2, 3, 4],
-    # business analyst
-    2 => [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
-    # Developer
-    3 => [19, 20, 21, 22, 23, 24, 25],
-    # IT Support Analyst
-    13 => [26, 27, 28, 29, 30, 24, 31, 32],
-    # Programme Manager
-    17 => [5, 6, 33, 7, 8, 10, 12, 35, 13, 36, 37, 38, 39, 40],
-    # Project Manager
-    18 => [5, 6, 33, 7, 8, 10, 12, 35, 13, 36, 37, 14, 38, 39, 40, 41, 42, 17],
-    # Service Delivery Manager
-    19 => [43, 44, 45, 46, 47, 48]
-  }
-
   add_enums :years_experience, :expertise, :company
 
-  def self.secondary_activities_for(primary_activity_id)
-    secondary_ids = SECONDARY_ACTIVITY_MAP[primary_activity_id]
-    secondary_ids.nil? ? [] : secondary_activities.select{ |k, v| secondary_ids.include?(v) }.keys
-  end
-
-  def self.mapped_secondary_activities
-    mapped = {}
-    primary_activities.each do |k, v|
-      secondaries = secondary_activities_for(v)
-      mapped[k] = secondaries unless secondaries.empty?
-    end
-    return mapped
-  end
-
-  def derived_primary_activity
-    primary_activity.nil? ? other_primary_activity : primary_activity
-  end
-
-  def derived_secondary_activity
-    secondary_activity.nil? ? other_secondary_activity : secondary_activity
+  def self.secondary_activity_map
+    {
+      # architect
+      1 => [1, 2, 3, 4],
+      # business analyst
+      2 => [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+      # Developer
+      3 => [19, 20, 21, 22, 23, 24, 25],
+      # IT Support Analyst
+      13 => [26, 27, 28, 29, 30, 24, 31, 32],
+      # Programme Manager
+      17 => [5, 6, 33, 7, 8, 10, 12, 35, 13, 36, 37, 38, 39, 40],
+      # Project Manager
+      18 => [5, 6, 33, 7, 8, 10, 12, 35, 13, 36, 37, 14, 38, 39, 40, 41, 42, 17],
+      # Service Delivery Manager
+      19 => [43, 44, 45, 46, 47, 48]
+    }
   end
 end
