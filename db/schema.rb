@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120181236) do
+ActiveRecord::Schema.define(version: 20151121090323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,11 +122,15 @@ ActiveRecord::Schema.define(version: 20151120181236) do
 
   create_table "user_experience_management_skills", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "industry"
     t.integer  "primary_activity"
+    t.integer  "secondary_activity"
     t.integer  "years_experience"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "other_primary_activity"
+    t.string   "other_secondary_activity"
+    t.integer  "expertise"
+    t.boolean  "in_last_five_years"
   end
 
   add_index "user_experience_management_skills", ["user_id"], name: "index_user_experience_management_skills_on_user_id", using: :btree

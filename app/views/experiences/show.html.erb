@@ -83,7 +83,7 @@
   <%- end -%>
 </div>
 
-<h3>Industry</h3>
+<h3>Industries</h3>
 <%- if @experience.industries.count > 0 -%>
 <table class="table">
   <thead>
@@ -123,35 +123,35 @@
     secondaryActivityMap = <%=UserExperienceIndustry.mapped_secondary_activities.to_json%>'}>
 <%= simple_form_for UserExperienceIndustry.new, html: {class: 'form-inline experience-form'} do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.input :primary_activity, wrapper_html: {class: 'col-md-2', 'ng-hide' => 'otherPrimaryVisible'},
-      input_html: {'ng-model' => 'selectedPrimaryActivity', 'ng-disabled' => 'otherPrimaryVisible'}, label: false,
-      collection: UserExperienceIndustry.primary_activities.keys.push("Other..."), prompt: 'Industry...' %>
-    <div class="form-group col-md-2" ng-show='otherPrimaryVisible'>
-      <div class="input-group">
-        <input id='user_experience_industry_other_primary_activity', name='user_experience_industry[other_primary_activity]',
-          class="form-control" type="text," placeholder="Industry...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="cancelOtherPrimaryActivity()">X</button>
-        </span>
-      </div>
+  <%= f.input :primary_activity, wrapper_html: {class: 'col-md-2', 'ng-hide' => 'otherPrimaryVisible'},
+    input_html: {'ng-model' => 'selectedPrimaryActivity', 'ng-disabled' => 'otherPrimaryVisible'}, label: false,
+    collection: UserExperienceIndustry.primary_activities.keys.push("Other..."), prompt: 'Industry...' %>
+  <div class="form-group col-md-2" ng-show='otherPrimaryVisible'>
+    <div class="input-group">
+      <input id='user_experience_industry_other_primary_activity', name='user_experience_industry[other_primary_activity]',
+        class="form-control" type="text," placeholder="Industry...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="cancelOtherPrimaryActivity()">X</button>
+      </span>
     </div>
-    <%= f.input :secondary_activity, wrapper_html: {class: 'col-md-2', 'ng-show' => 'secondaryActivitiesVisible'}, 
-      label: false do -%>
-      <%= f.select :secondary_activity, [], {prompt: 'Experience...'}, 
-        {class: 'form-control select', 'ng-model'  => 'selectedSecondaryActivity', 'ng-disabled' => 'otherSecondaryVisible'} do %>
-        <option ng-repeat="sa in availableSecondaryActivities" value="{{sa}}">{{sa}}</option>
-        <option>Other...</option>
-      <%- end -%>
+  </div>
+  <%= f.input :secondary_activity, wrapper_html: {class: 'col-md-2', 'ng-show' => 'secondaryActivitiesVisible'}, 
+    label: false do -%>
+    <%= f.select :secondary_activity, [], {prompt: 'Experience...'}, 
+      {class: 'form-control select', 'ng-model'  => 'selectedSecondaryActivity', 'ng-disabled' => 'otherSecondaryVisible'} do %>
+      <option ng-repeat="sa in availableSecondaryActivities" value="{{sa}}">{{sa}}</option>
+      <option>Other...</option>
     <%- end -%>
-    <div class="form-group col-md-2" ng-show='otherSecondaryVisible'>
-      <div class="input-group">
-        <input id='user_experience_industry_other_secondary_activity', name='user_experience_industry[other_secondary_activity]',
-          class="form-control" type="text," placeholder="Experience...">
-        <span class="input-group-btn" ng-hide='otherPrimaryVisible'>
-          <button class="btn btn-default" type="button" ng-click="cancelOtherSecondaryActivity()">X</button>
-        </span>
-      </div>
+  <%- end -%>
+  <div class="form-group col-md-2" ng-show='otherSecondaryVisible'>
+    <div class="input-group">
+      <input id='user_experience_industry_other_secondary_activity', name='user_experience_industry[other_secondary_activity]',
+        class="form-control" type="text," placeholder="Experience...">
+      <span class="input-group-btn" ng-hide='otherPrimaryVisible'>
+        <button class="btn btn-default" type="button" ng-click="cancelOtherSecondaryActivity()">X</button>
+      </span>
     </div>
+  </div>
   <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'},  
     collection: UserExperienceIndustry.years_experiences.keys, prompt: 'Years Experience...' %>
   <%= f.input :company, label: false, wrapper_html: {class: 'col-md-2'}, 
@@ -168,34 +168,76 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Industry</th>
-        <th>Primary Activity</th>
+        <th>Management Skill</th>
+        <th>Experience</th>
         <th>Years Experience</th>
+        <th>Expertise</th>
+        <th>Last 5 Years?</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <%- @experience.management_skills.each do |management_skill| %>
       <tr>
-        <td><%= management_skill.industry %></td>
         <td><%= management_skill.primary_activity%></td>
+        <td><%= management_skill.secondary_activity%></td>
         <td><%= management_skill.years_experience%></td>
-        <td></td>
+        <td><%= management_skill.expertise%></td>
+        <td>
+          <%-if management_skill.in_last_five_years? -%>
+            <span class="glyphicon glyphicon-ok text-success"></span>
+          <%- end -%>
+        </td>
+        <td>
+          <%= button_to "Delete", user_experience_management_skill_path(management_skill.id), 
+            method: :delete, class: 'btn btn-danger btn-xs' %>
+        </td>
       </tr>
       <%- end -%>
     </tbody>
   </table>
 <%- end -%>
 
-<div class="row">
+<div ng-controller='UserExperienceActivitiesController' 
+    class="row"
+    ng-init='primaryActivities = <%=UserExperienceManagementSkill.primary_activities.to_json%>; 
+    secondaryActivityMap = <%=UserExperienceManagementSkill.mapped_secondary_activities.to_json%>'}>
   <%= simple_form_for UserExperienceManagementSkill.new, html: {class: 'form-inline experience-form'} do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.input :industry, label: false, wrapper_html: {class: 'col-md-3'}, 
-      collection: UserExperienceManagementSkill.industries.keys, prompt: 'Please select...' %> 
-    <%= f.input :primary_activity, label: false, wrapper_html: {class: 'col-md-3'},
-      collection: UserExperienceManagementSkill.primary_activities.keys, prompt: 'Please select...' %> 
-    <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-3'}, 
-      collection: UserExperienceManagementSkill.years_experiences.keys, prompt: 'Please select...' %>
+    <%= f.input :primary_activity, wrapper_html: {class: 'col-md-2', 'ng-hide' => 'otherPrimaryVisible'},
+      input_html: {'ng-model' => 'selectedPrimaryActivity', 'ng-disabled' => 'otherPrimaryVisible'}, label: false,
+      collection: UserExperienceManagementSkill.primary_activities.keys.push("Other..."), prompt: 'Management Skill...' %>
+    <div class="form-group col-md-2" ng-show='otherPrimaryVisible'>
+      <div class="input-group">
+        <input id='user_experience_management_skill_other_primary_activity', name='user_experience_management_skill[other_primary_activity]',
+          class="form-control" type="text," placeholder="Management Skill...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="cancelOtherPrimaryActivity()">X</button>
+        </span>
+      </div>
+    </div>
+    <%= f.input :secondary_activity, wrapper_html: {class: 'col-md-2', 'ng-show' => 'secondaryActivitiesVisible'}, 
+      label: false do -%>
+      <%= f.select :secondary_activity, [], {prompt: 'Experience...'}, 
+        {class: 'form-control select', 'ng-model'  => 'selectedSecondaryActivity', 'ng-disabled' => 'otherSecondaryVisible'} do %>
+        <option ng-repeat="sa in availableSecondaryActivities" value="{{sa}}">{{sa}}</option>
+        <option>Other...</option>
+      <%- end -%>
+    <%- end -%>
+    <div class="form-group col-md-2" ng-show='otherSecondaryVisible'>
+      <div class="input-group">
+        <input id='user_experience_management_skill_other_secondary_activity', name='user_experience_management_skill[other_secondary_activity]',
+          class="form-control" type="text," placeholder="Experience...">
+        <span class="input-group-btn" ng-hide='otherPrimaryVisible'>
+          <button class="btn btn-default" type="button" ng-click="cancelOtherSecondaryActivity()">X</button>
+        </span>
+      </div>
+    </div>
+    <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceManagementSkill.years_experiences.keys, prompt: 'Years Experience...' %>
+    <%= f.input :expertise, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceManagementSkill.expertises.keys, prompt: 'Expertise...' %>
+    <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
     <div class="form-group col-md-3">
       <%= f.submit 'Add Management Skill', class: 'btn btn-primary col-md-12' %>
     </div>

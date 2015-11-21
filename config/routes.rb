@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resource  :experience, only: [:show]
   resources :user_experience_roles, only: [:create, :destroy]
   resources :user_experience_industries, only: [:create, :destroy]
-  resources :user_experience_management_skills, only: [:create]
+  resources :user_experience_management_skills, only: [:create, :destroy]
 
   resources :competencies, only: [:index] do
     collection { post :reorder }
