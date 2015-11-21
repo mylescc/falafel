@@ -6,6 +6,7 @@ class ExperiencesController < ApplicationController
       roles: UserExperienceRole.where(user_id: current_user.id),
       industries: UserExperienceIndustry.where(user_id: current_user.id),
       management_skills: UserExperienceManagementSkill.where(user_id: current_user.id),
+      ue_methods: UserExperienceMethod.where(user_id: current_user.id),
     )
   end
 end
