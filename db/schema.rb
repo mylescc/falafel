@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121120438) do
+ActiveRecord::Schema.define(version: 20151121155503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,25 @@ ActiveRecord::Schema.define(version: 20151121120438) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_experience_applications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "primary_activity"
+    t.integer  "secondary_activity"
+    t.string   "other_primary_activity"
+    t.string   "other_secondary_activity"
+    t.integer  "years_experience"
+    t.integer  "expertise"
+    t.integer  "company"
+    t.integer  "project"
+    t.integer  "service"
+    t.integer  "technology"
+    t.boolean  "in_last_five_years"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_experience_applications", ["user_id"], name: "index_user_experience_applications_on_user_id", using: :btree
 
   create_table "user_experience_industries", force: :cascade do |t|
     t.integer  "user_id"
