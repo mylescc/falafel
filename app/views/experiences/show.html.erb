@@ -375,11 +375,11 @@
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.input :primary_activity, wrapper_html: {class: 'col-md-2', 'ng-hide' => 'otherPrimaryVisible'},
       input_html: {'ng-model' => 'selectedPrimaryActivity', 'ng-disabled' => 'otherPrimaryVisible'}, label: false,
-      collection: UserExperienceApplication.primary_activities.keys.push("Other..."), prompt: 'Method...' %>
+      collection: UserExperienceApplication.primary_activities.keys.push("Other..."), prompt: 'Application...' %>
     <div class="form-group col-md-2" ng-show='otherPrimaryVisible'>
       <div class="input-group">
         <input id='user_experience_application_other_primary_activity', name='user_experience_application[other_primary_activity]',
-          class="form-control" type="text," placeholder="Method...">
+          class="form-control" type="text," placeholder="Application...">
         <span class="input-group-btn">
           <button class="btn btn-default" type="button" ng-click="cancelOtherPrimaryActivity()">X</button>
         </span>
@@ -415,8 +415,8 @@
     <%= f.input :technology, label: false, wrapper_html: {class: 'col-md-2'}, 
       collection: UserExperienceApplication.technologies.keys, prompt: 'Technology...' %>
     <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
-    <div class="form-group col-md-2">
-      <%= f.submit 'Add Method', class: 'btn btn-primary col-md-12' %>
+    <div class="form-group col-md-3">
+      <%= f.submit 'Add Application', class: 'btn btn-primary col-md-12' %>
     </div>
   <%- end -%>
 </div>
