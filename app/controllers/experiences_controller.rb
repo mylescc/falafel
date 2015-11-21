@@ -9,6 +9,7 @@ class ExperiencesController < ApplicationController
       ue_methods: UserExperienceMethod.where(user_id: current_user.id),
       applications: UserExperienceApplication.where(user_id: current_user.id),
       languages: UserExperienceLanguage.where(user_id: current_user.id),
+      infrastructures: UserExperienceInfrastructure.where(user_id: current_user.id)
     )
   end
 end

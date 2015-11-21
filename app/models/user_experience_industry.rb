@@ -49,7 +49,7 @@ class UserExperienceIndustry < ActiveRecord::Base
     'Asset Management' => 10,
     'Housing' => 11,
     'Real Estate' => 12,
-    'PS Healthcare' => 13,
+    '-Healthcare' => 13,
     'Central Government' => 14,
     'Local Government' => 15,
     'NGO' => 16,

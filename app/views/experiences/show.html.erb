@@ -500,3 +500,96 @@
     </div>
   <%- end -%>
 </div>
+
+<h3>Infrastructures</h3>
+<%- if @experience.infrastructures.count > 0 -%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Infrastructure</th>
+        <th>Experience</th>
+        <th>Years Experience</th>
+        <th>Expertise</th>
+        <th>Company</th>
+        <th>Project</th>
+        <th>Service</th>
+        <th>Last 5 Years?</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @experience.infrastructures.each do |infrastructure| %>
+      <tr>
+        <td><%= infrastructure.primary_activity%></td>
+        <td><%= infrastructure.secondary_activity%></td>
+        <td><%= infrastructure.years_experience%></td>
+        <td><%= infrastructure.expertise%></td>
+        <td><%= infrastructure.company%></td>
+        <td><%= infrastructure.project%></td>
+        <td><%= infrastructure.service%></td>
+        <td>
+          <%-if infrastructure.in_last_five_years? -%>
+            <span class="glyphicon glyphicon-ok text-success"></span>
+          <%- end -%>
+        </td>
+        <td>
+          <%= button_to "Delete", user_experience_infrastructure_path(infrastructure.id), 
+            method: :delete, class: 'btn btn-danger btn-xs' %>
+        </td>
+      </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+<%- end -%>
+
+<div ng-controller='UserExperienceActivitiesController' 
+    class="row"
+    ng-init='primaryActivities = <%=UserExperienceInfrastructure.primary_activities.to_json%>; 
+    secondaryActivityMap = <%=UserExperienceInfrastructure.mapped_secondary_activities.to_json%>'}>
+  <%= simple_form_for UserExperienceInfrastructure.new, html: {class: 'form-inline experience-form'} do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.input :primary_activity, wrapper_html: {class: 'col-md-2', 'ng-hide' => 'otherPrimaryVisible'},
+      input_html: {'ng-model' => 'selectedPrimaryActivity', 'ng-disabled' => 'otherPrimaryVisible'}, label: false,
+      collection: UserExperienceInfrastructure.primary_activities.keys.push("Other..."), prompt: 'Infrastructure...' %>
+    <div class="form-group col-md-2" ng-show='otherPrimaryVisible'>
+      <div class="input-group">
+        <input id='user_experience_infrastructure_other_primary_activity', name='user_experience_infrastructure[other_primary_activity]',
+          class="form-control" type="text," placeholder="Language...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="cancelOtherPrimaryActivity()">X</button>
+        </span>
+      </div>
+    </div>
+    <%= f.input :secondary_activity, wrapper_html: {class: 'col-md-2', 'ng-show' => 'secondaryActivitiesVisible'}, 
+      label: false do -%>
+      <%= f.select :secondary_activity, [], {prompt: 'Experience...'}, 
+        {class: 'form-control select', 'ng-model'  => 'selectedSecondaryActivity', 'ng-disabled' => 'otherSecondaryVisible'} do %>
+        <option ng-repeat="sa in availableSecondaryActivities" value="{{sa}}">{{sa}}</option>
+        <option>Other...</option>
+      <%- end -%>
+    <%- end -%>
+    <div class="form-group col-md-2" ng-show='otherSecondaryVisible'>
+      <div class="input-group">
+        <input id='user_experience_infrastructure_other_secondary_activity', name='user_experience_infrastructure[other_secondary_activity]',
+          class="form-control" type="text," placeholder="Experience...">
+        <span class="input-group-btn" ng-hide='otherPrimaryVisible'>
+          <button class="btn btn-default" type="button" ng-click="cancelOtherSecondaryActivity()">X</button>
+        </span>
+      </div>
+    </div>
+    <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceInfrastructure.years_experiences.keys, prompt: 'Years Experience...' %>
+    <%= f.input :expertise, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceInfrastructure.expertises.keys, prompt: 'Expertise...' %>
+    <%= f.input :company, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceInfrastructure.companies.keys, prompt: 'Company...' %>
+    <%= f.input :project, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceInfrastructure.projects.keys, prompt: 'Project...' %>
+    <%= f.input :service, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceInfrastructure.services.keys, prompt: 'Service...' %>
+    <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
+    <div class="form-group col-md-3">
+      <%= f.submit 'Add Infrastructure', class: 'btn btn-primary col-md-12' %>
+    </div>
+  <%- end -%>
+</div>
