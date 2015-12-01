@@ -11,13 +11,13 @@
       $http({
         method: 'PATCH',
         url: '/roles/update',
-        data: { roles: this.roles }
+        data: { roles: formatForSubmit(this.roles) }
       })
       .then(function success(response) {
         console.log('success');
         console.log(response);
         this.roles = response.data.roles;
-      }, function error(response) {
+      }.bind(this), function error(response) {
         console.log('error');
         console.log(response);
       });
@@ -34,6 +34,23 @@
     };
     this.availableMinDate = new Date();
     this.availableMaxDate = new Date(2020, 12, 31);
+
+
+    function formatForSubmit(roles) {
+      roles.forEach(function(role) {
+        if (!!role.position) {
+          role.position = parseInt(role.position)
+        }
+      });
+      return roles;
+    }
+
+    function prepData() {
+      this.roles.forEach(function(role) {
+        role.position = !role.position ? "" : role.position.toString();
+      });
+    };
+    prepData.bind(this)();
   };
 
   RoleController.$inject = ['Roles', '$http'];
