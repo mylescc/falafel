@@ -9,3 +9,4 @@
 //= require ng-rails-csrf
 //= require turbolinks
 //= require_tree .
+//= require lodash
