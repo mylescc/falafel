@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function RoleController(Roles, $http) {
+  function RoleController(Roles, Positions, $http) {
     this.showRole = function(index) {
       console.log('showing role ' + (index + 1));
       this.currentRole = this.roles[index];
@@ -27,6 +27,10 @@
       this.calendarStatus.opened = true;
     };
 
+    this.getRoleValue = function(key) {
+      return _.invert(Positions)[key]
+    };
+
     this.roles = Roles;
     this.showRole(0);
     this.calendarStatus = {
@@ -43,6 +47,6 @@
     prepData.bind(this)();
   };
 
-  RoleController.$inject = ['Roles', '$http'];
+  RoleController.$inject = ['Roles', 'Positions', '$http'];
   angular.module('Fused4').controller('RoleController', RoleController);
 })();

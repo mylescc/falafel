@@ -1,6 +1,8 @@
 <script type="text/javascript">
   angular.module('Fused4').constant('Roles',
    <%= @roles.to_json.html_safe %>);
+    angular.module('Fused4').constant('Positions',
+   <%= Role.positions.to_json.html_safe %>);
 </script>
 <div ng-controller='RoleController as ctrl'>
   <h2>Role Preferences</h2>
@@ -11,7 +13,8 @@
       <div  class="role-option"
             ng-class="{'selected': ctrl.currentRole === role}"
             ng-click="ctrl.showRole($index)">
-        Role {{ $index + 1 }}
+        Role {{ $index + 1 }} <br/>
+        <b>({{ !!role.position ? ctrl.getRoleValue(role.position) : 'Role not set' }})</b>
       </div>
     </div>
   </div>
