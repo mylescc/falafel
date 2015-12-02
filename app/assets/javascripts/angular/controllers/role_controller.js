@@ -42,6 +42,7 @@
     function prepData() {
       this.roles.forEach(function(role) {
         role.position = !role.position ? "" : role.position;
+        role.contract_available_at = !role.contract_available_at ? null : moment(role.contract_available_at).toDate();
       });
     };
     prepData.bind(this)();
