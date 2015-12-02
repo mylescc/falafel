@@ -1,16 +1,5 @@
 <form ng-submit="ctrl.saveRoleChanges()">
 <div class="row">
-
-  <div class="col-xs-12 role-position-container">
-    <%= select_tag("position", options_for_select(Role.positions),
-                    'ng-model': "ctrl.currentRole.position",
-                    'ng-required': true,
-                    prompt: 'Select a position',
-                    class: ' form-control') %>
-  </div>
-
-  <div class="clearfix"></div>
-
   <!-- Permanent Section -->
   <div class="col-sm-6 role-type-selection-container">
     <div class="role-type-selection">
