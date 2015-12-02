@@ -33,11 +33,7 @@ class RolesController < ApplicationController
   end
 
   def update_roles_params
-    result = params.require(:roles).map{|role| role.permit(*Role.attribute_names.reject{ |attrib| filtered_role_params.include?(attrib) }) }
-    result.map do |role|
-      role['position'] = role['position'].to_i
-      role
-    end
+    params.require(:roles).map{|role| role.permit(*Role.attribute_names.reject{ |attrib| filtered_role_params.include?(attrib) }) }
   end
 
   def filtered_role_params

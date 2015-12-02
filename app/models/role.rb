@@ -17,7 +17,7 @@ class Role < ActiveRecord::Base
           class_name: 'RoleTravelWillingnessOption',
           foreign_key: 'contract_role_travel_willingness_option_id'
 
-  validates_presence_of :user, :position
+  validates_presence_of :user
 
   enum position: {
     'Architect': 1,
