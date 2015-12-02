@@ -2,7 +2,7 @@ class RolesController < ApplicationController
   layout 'talent'
 
   def show
-    @roles = user_roles
+    @roles = roles_as_hash(user_roles)
     @role_distances = RoleDistance.all
     @travel_willingness_options = RoleTravelWillingnessOption.all
   end
@@ -16,6 +16,8 @@ class RolesController < ApplicationController
     return render json: { roles: user_roles }
   end
 
+
+
   private
 
   def user_roles
@@ -24,8 +26,18 @@ class RolesController < ApplicationController
     existing + remainder
   end
 
+  def roles_as_hash(roles)
+    roles.map do |role|
+      role.attributes
+    end
+  end
+
   def update_roles_params
-    params.require(:roles).map{|role| role.permit(*Role.attribute_names.reject{ |attrib| filtered_role_params.include?(attrib) }) }
+    result = params.require(:roles).map{|role| role.permit(*Role.attribute_names.reject{ |attrib| filtered_role_params.include?(attrib) }) }
+    result.map do |role|
+      role['position'] = role['position'].to_i
+      role
+    end
   end
 
   def filtered_role_params

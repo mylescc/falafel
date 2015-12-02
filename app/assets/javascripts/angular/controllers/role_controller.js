@@ -11,7 +11,7 @@
       $http({
         method: 'PATCH',
         url: '/roles/update',
-        data: { roles: formatForSubmit(this.roles) }
+        data: { roles: this.roles }
       })
       .then(function success(response) {
         console.log('success');
@@ -35,19 +35,9 @@
     this.availableMinDate = new Date();
     this.availableMaxDate = new Date(2020, 12, 31);
 
-
-    function formatForSubmit(roles) {
-      roles.forEach(function(role) {
-        if (!!role.position) {
-          role.position = parseInt(role.position)
-        }
-      });
-      return roles;
-    }
-
     function prepData() {
       this.roles.forEach(function(role) {
-        role.position = !role.position ? "" : role.position.toString();
+        role.position = !role.position ? "" : role.position;
       });
     };
     prepData.bind(this)();

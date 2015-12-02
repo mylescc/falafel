@@ -44,4 +44,8 @@ class Role < ActiveRecord::Base
     'Test Analyst': 22,
     'Test Manager': 23
   }
+
+  def position=(val)
+    write_attribute :position, val.to_i
+  end
 end
