@@ -10,3 +10,4 @@
 //= require turbolinks
 //= require_tree .
 //= require lodash
+//= require moment
