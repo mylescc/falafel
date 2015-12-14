@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121181746) do
+ActiveRecord::Schema.define(version: 20151214113650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20151121181746) do
     t.boolean  "in_last_five_years"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "context"
   end
 
   add_index "user_experience_applications", ["user_id"], name: "index_user_experience_applications_on_user_id", using: :btree
@@ -153,6 +154,7 @@ ActiveRecord::Schema.define(version: 20151121181746) do
     t.boolean  "in_last_five_years"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "context"
   end
 
   add_index "user_experience_infrastructures", ["user_id"], name: "index_user_experience_infrastructures_on_user_id", using: :btree
@@ -168,6 +170,7 @@ ActiveRecord::Schema.define(version: 20151121181746) do
     t.boolean  "in_last_five_years"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "context"
   end
 
   add_index "user_experience_languages", ["user_id"], name: "index_user_experience_languages_on_user_id", using: :btree

@@ -18,7 +18,7 @@ class UserExperienceMethodsController < ApplicationController
 
   def user_experience_method_params
     params.require(:user_experience_method).permit(
-      :user_id, :primary_activity, :secondary_activity, :years_experience, :company, :in_last_five_years,
+      :user_id, :primary_activity, :secondary_activity, :years_experience, :in_last_five_years,
       :other_primary_activity, :other_secondary_activity
     )
   end

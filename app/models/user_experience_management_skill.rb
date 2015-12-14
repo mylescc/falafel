@@ -44,7 +44,7 @@ class UserExperienceManagementSkill < ActiveRecord::Base
     'Target Operating Model (TOM)' => 28
   }
 
-  add_enums :years_experience, :expertise
+  add_enums :years_experience
 
   def self.secondary_activity_map
     {

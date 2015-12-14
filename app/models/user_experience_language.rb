@@ -48,7 +48,7 @@ class UserExperienceLanguage < ActiveRecord::Base
     'WPF' => 24
   }
 
-  add_enums :years_experience, :expertise
+  add_enums :years_experience, :context
 
   def self.secondary_activity_map
     {

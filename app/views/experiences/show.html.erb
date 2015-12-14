@@ -7,7 +7,6 @@
         <th>Role</th>
         <th>Experience</th>
         <th>Years Experience</th>
-        <th>Expertise</th>
         <th>Company</th>
         <th>Last 5 Years?</th>
         <th></th>
@@ -19,14 +18,13 @@
           <td><%= role.derived_primary_activity%></td>
           <td><%= role.derived_secondary_activity%></td>
           <td><%= role.years_experience%></td>
-          <td><%= role.expertise%></td>
           <td><%= role.company%></td>
           <td>
             <%-if role.in_last_five_years? -%>
               <span class="glyphicon glyphicon-ok text-success"></span>
             <%- end -%>
           </td>
-          <td>
+          <td class="table-button-cell">
             <%= button_to "Delete", user_experience_role_path(role.id), method: :delete, class: 'btn btn-danger btn-xs' %>
           </td>
         </tr>
@@ -71,14 +69,12 @@
     </div>
     <%= f.input :years_experience, wrapper_html: {class: 'col-md-2'},label: false, 
       collection: UserExperienceRole.years_experiences.keys, prompt: 'Years Experience...'%>
-    <%= f.input :expertise, wrapper_html: {class: 'col-md-2'},label: false, 
-      collection: UserExperienceRole.expertises.keys, prompt: 'Expertise...'%>
     <%= f.input :company, wrapper_html: {class: 'col-md-2'},label: false, 
       collection: UserExperienceRole.companies.keys, prompt: 'Companies...'%>
     <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
 
     <div class="form-group col-md-2">
-      <%= f.submit 'Add Role', class: 'btn btn-primary col-md-12'%>
+      <%= f.submit 'Add Role', class: 'btn btn-primary col-md-12', "ng-disabled" => "!buttonEnabled"%>
     </div>
   <%- end -%>
 </div>
@@ -89,9 +85,8 @@
   <thead>
     <tr>
       <th>Industry</th>
-      <th>Exprience</th>
+      <th>Experience</th>
       <th>Years Experience</th>
-      <th>Company</th>
       <th>Last 5 Years?</th>
       <th></th>
     </tr>
@@ -102,13 +97,12 @@
         <td><%= industry.derived_primary_activity %></td>
         <td><%= industry.derived_secondary_activity%></td>
         <td><%= industry.years_experience%></td>
-        <td><%= industry.company%></td>
         <td>
           <%-if industry.in_last_five_years? -%>
             <span class="glyphicon glyphicon-ok text-success"></span>
           <%- end -%>
         </td>
-        <td>
+        <td class="table-button-cell">
           <%= button_to "Delete", user_experience_industry_path(industry.id), method: :delete, class: 'btn btn-danger btn-xs' %>
         </td>
       </tr>
@@ -154,11 +148,9 @@
   </div>
   <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'},  
     collection: UserExperienceIndustry.years_experiences.keys, prompt: 'Years Experience...' %>
-  <%= f.input :company, label: false, wrapper_html: {class: 'col-md-2'}, 
-    collection: UserExperienceIndustry.companies.keys, prompt: 'Company...'  %> 
   <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
   <div class="form-group col-md-2">
-    <%= f.submit 'Add Industry', class: 'btn btn-primary col-md-12' %>
+    <%= f.submit 'Add Industry', class: 'btn btn-primary col-md-12', "ng-disabled" => "!buttonEnabled"%>
   </div>
 <%- end -%>
 </div>
@@ -171,7 +163,6 @@
         <th>Management Skill</th>
         <th>Experience</th>
         <th>Years Experience</th>
-        <th>Expertise</th>
         <th>Last 5 Years?</th>
         <th></th>
       </tr>
@@ -182,13 +173,12 @@
         <td><%= management_skill.primary_activity%></td>
         <td><%= management_skill.secondary_activity%></td>
         <td><%= management_skill.years_experience%></td>
-        <td><%= management_skill.expertise%></td>
         <td>
           <%-if management_skill.in_last_five_years? -%>
             <span class="glyphicon glyphicon-ok text-success"></span>
           <%- end -%>
         </td>
-        <td>
+        <td class="table-button-cell">
           <%= button_to "Delete", user_experience_management_skill_path(management_skill.id), 
             method: :delete, class: 'btn btn-danger btn-xs' %>
         </td>
@@ -235,11 +225,9 @@
     </div>
     <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'}, 
       collection: UserExperienceManagementSkill.years_experiences.keys, prompt: 'Years Experience...' %>
-    <%= f.input :expertise, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceManagementSkill.expertises.keys, prompt: 'Expertise...' %>
     <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
     <div class="form-group col-md-3">
-      <%= f.submit 'Add Management Skill', class: 'btn btn-primary col-md-12' %>
+      <%= f.submit 'Add Management Skill', class: 'btn btn-primary col-md-12', "ng-disabled" => "!buttonEnabled" %>
     </div>
   <%- end -%>
 </div>
@@ -252,7 +240,6 @@
         <th>Method</th>
         <th>Experience</th>
         <th>Years Experience</th>
-        <th>Expertise</th>
         <th>Last 5 Years?</th>
         <th></th>
       </tr>
@@ -263,13 +250,12 @@
         <td><%= method.primary_activity%></td>
         <td><%= method.secondary_activity%></td>
         <td><%= method.years_experience%></td>
-        <td><%= method.expertise%></td>
         <td>
           <%-if method.in_last_five_years? -%>
             <span class="glyphicon glyphicon-ok text-success"></span>
           <%- end -%>
         </td>
-        <td>
+        <td class="table-button-cell">
           <%= button_to "Delete", user_experience_method_path(method.id), 
             method: :delete, class: 'btn btn-danger btn-xs' %>
         </td>
@@ -316,11 +302,9 @@
     </div>
     <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'}, 
       collection: UserExperienceMethod.years_experiences.keys, prompt: 'Years Experience...' %>
-    <%= f.input :expertise, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceMethod.expertises.keys, prompt: 'Expertise...' %>
     <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
     <div class="form-group col-md-2">
-      <%= f.submit 'Add Method', class: 'btn btn-primary col-md-12' %>
+      <%= f.submit 'Add Method', class: 'btn btn-primary col-md-12', "ng-disabled" => "!buttonEnabled" %>
     </div>
   <%- end -%>
 </div>
@@ -332,12 +316,8 @@
       <tr>
         <th>Application</th>
         <th>Experience</th>
+        <th>Context</th>
         <th>Years Experience</th>
-        <th>Expertise</th>
-        <th>Company</th>
-        <th>Project</th>
-        <th>Service</th>
-        <th>Technology</th>
         <th>Last 5 Years?</th>
         <th></th>
       </tr>
@@ -347,18 +327,14 @@
       <tr>
         <td><%= application.primary_activity%></td>
         <td><%= application.secondary_activity%></td>
+        <td><%= application.context%></td>
         <td><%= application.years_experience%></td>
-        <td><%= application.expertise%></td>
-        <td><%= application.company%></td>
-        <td><%= application.project%></td>
-        <td><%= application.service%></td>
-        <td><%= application.technology%></td>
         <td>
           <%-if application.in_last_five_years? -%>
             <span class="glyphicon glyphicon-ok text-success"></span>
           <%- end -%>
         </td>
-        <td>
+        <td class="table-button-cell">
           <%= button_to "Delete", user_experience_application_path(application.id), 
             method: :delete, class: 'btn btn-danger btn-xs' %>
         </td>
@@ -402,21 +378,13 @@
         </span>
       </div>
     </div>
+    <%= f.input :context, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceApplication.contexts.keys, prompt: 'Context...' %>
     <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'}, 
       collection: UserExperienceApplication.years_experiences.keys, prompt: 'Years Experience...' %>
-    <%= f.input :expertise, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceApplication.expertises.keys, prompt: 'Expertise...' %>
-    <%= f.input :company, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceApplication.companies.keys, prompt: 'Company...' %>
-    <%= f.input :project, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceApplication.projects.keys, prompt: 'Project...' %>
-    <%= f.input :service, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceApplication.services.keys, prompt: 'Service...' %>
-    <%= f.input :technology, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceApplication.technologies.keys, prompt: 'Technology...' %>
     <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
     <div class="form-group col-md-3">
-      <%= f.submit 'Add Application', class: 'btn btn-primary col-md-12' %>
+      <%= f.submit 'Add Application', class: 'btn btn-primary col-md-12', "ng-disabled" => "!buttonEnabled" %>
     </div>
   <%- end -%>
 </div>
@@ -428,8 +396,8 @@
       <tr>
         <th>Language</th>
         <th>Experience</th>
+        <th>Context</th>
         <th>Years Experience</th>
-        <th>Expertise</th>
         <th>Last 5 Years?</th>
         <th></th>
       </tr>
@@ -439,14 +407,14 @@
       <tr>
         <td><%= language.primary_activity%></td>
         <td><%= language.secondary_activity%></td>
+        <td><%= language.context%></td>
         <td><%= language.years_experience%></td>
-        <td><%= language.expertise%></td>
         <td>
           <%-if language.in_last_five_years? -%>
             <span class="glyphicon glyphicon-ok text-success"></span>
           <%- end -%>
         </td>
-        <td>
+        <td class="table-button-cell">
           <%= button_to "Delete", user_experience_language_path(language.id), 
             method: :delete, class: 'btn btn-danger btn-xs' %>
         </td>
@@ -490,29 +458,26 @@
         </span>
       </div>
     </div>
+    <%= f.input :context, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceApplication.contexts.keys, prompt: 'Context...' %>
     <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'}, 
       collection: UserExperienceApplication.years_experiences.keys, prompt: 'Years Experience...' %>
-    <%= f.input :expertise, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceApplication.expertises.keys, prompt: 'Expertise...' %>
     <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
     <div class="form-group col-md-3">
-      <%= f.submit 'Add Language', class: 'btn btn-primary col-md-12' %>
+      <%= f.submit 'Add Language', class: 'btn btn-primary col-md-12', "ng-disabled" => "!buttonEnabled" %>
     </div>
   <%- end -%>
 </div>
 
-<h3>Infrastructures</h3>
+<h3>Infrastructure</h3>
 <%- if @experience.infrastructures.count > 0 -%>
   <table class="table">
     <thead>
       <tr>
         <th>Infrastructure</th>
         <th>Experience</th>
+        <th>Context</th>
         <th>Years Experience</th>
-        <th>Expertise</th>
-        <th>Company</th>
-        <th>Project</th>
-        <th>Service</th>
         <th>Last 5 Years?</th>
         <th></th>
       </tr>
@@ -522,17 +487,14 @@
       <tr>
         <td><%= infrastructure.primary_activity%></td>
         <td><%= infrastructure.secondary_activity%></td>
+        <td><%= infrastructure.context%></td>
         <td><%= infrastructure.years_experience%></td>
-        <td><%= infrastructure.expertise%></td>
-        <td><%= infrastructure.company%></td>
-        <td><%= infrastructure.project%></td>
-        <td><%= infrastructure.service%></td>
         <td>
           <%-if infrastructure.in_last_five_years? -%>
             <span class="glyphicon glyphicon-ok text-success"></span>
           <%- end -%>
         </td>
-        <td>
+        <td class="table-button-cell">
           <%= button_to "Delete", user_experience_infrastructure_path(infrastructure.id), 
             method: :delete, class: 'btn btn-danger btn-xs' %>
         </td>
@@ -577,19 +539,13 @@
         </span>
       </div>
     </div>
+    <%= f.input :context, label: false, wrapper_html: {class: 'col-md-2'}, 
+      collection: UserExperienceInfrastructure.contexts.keys, prompt: 'Context...' %>
     <%= f.input :years_experience, label: false, wrapper_html: {class: 'col-md-2'}, 
       collection: UserExperienceInfrastructure.years_experiences.keys, prompt: 'Years Experience...' %>
-    <%= f.input :expertise, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceInfrastructure.expertises.keys, prompt: 'Expertise...' %>
-    <%= f.input :company, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceInfrastructure.companies.keys, prompt: 'Company...' %>
-    <%= f.input :project, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceInfrastructure.projects.keys, prompt: 'Project...' %>
-    <%= f.input :service, label: false, wrapper_html: {class: 'col-md-2'}, 
-      collection: UserExperienceInfrastructure.services.keys, prompt: 'Service...' %>
     <%= f.input :in_last_five_years, wrapper_html: { class: 'col-md-2'} %>
     <div class="form-group col-md-3">
-      <%= f.submit 'Add Infrastructure', class: 'btn btn-primary col-md-12' %>
+      <%= f.submit 'Add Infrastructure', class: 'btn btn-primary col-md-12', "ng-disabled" => "!buttonEnabled" %>
     </div>
   <%- end -%>
 </div>

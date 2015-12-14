@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <%= render 'layouts/head' %>
-</head>
-<body ng-app="Fused4">
-<%= render 'layouts/navbar' %>
-<%= render 'layouts/notifications' %>
+  <head>
+    <%= render 'layouts/head' %>
+  </head>
+  <body ng-app="Fused4">
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/notifications' %>
 
-<div class="container">
-<div class="row">
-  <div class="col-sm-3">
-    <h1>Profile</h1>
-    <hr/>
-    <ul class="nav nav-pills nav-stacked">
-      <li><%= link_to 'Basic Details', nav_personal_details_link(current_user)  %></li>
-      <li><%= link_to 'Role Preferences', roles_show_path %></li>
-      <li><%= link_to 'Video Statement', video_statement_path%></li>
-      <li><%= link_to 'Experience', experience_path%></li>
-      <li><%= link_to 'Competencies', competencies_path%></li>
-      <li><%= link_to 'Qualifications', qualifications_path%></li>
-      <li><%= link_to 'Achievements', achievements_path%></li>
-      <li><%= link_to 'References', references_path%></li>
-    </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <h1>Profile</h1>
+          <hr/>
+          <ul class="nav nav-pills nav-stacked">
+            <li><%= link_to 'Basic Details', nav_personal_details_link(current_user)  %></li>
+            <li><%= link_to 'Role Preferences', roles_show_path %></li>
+            <li><%= link_to 'Video Statement', video_statement_path%></li>
+            <li><%= link_to 'Experience', experience_path%></li>
+            <li><%= link_to 'Competencies', competencies_path%></li>
+            <li><%= link_to 'Qualifications', qualifications_path%></li>
+            <li><%= link_to 'Achievements', achievements_path%></li>
+            <li><%= link_to 'References', references_path%></li>
+          </ul>
 
-  </div>
-  <div class="col-sm-9">
+        </div>
+        <div class="col-sm-9">
 
-    <%= yield %>
+          <%= yield %>
 
-  </div>
-</div>
-</div>
-
-</body>
+        </div>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+  </body>
 </html>

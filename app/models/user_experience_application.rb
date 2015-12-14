@@ -75,7 +75,7 @@ class UserExperienceApplication < ActiveRecord::Base
     'XI' => 45
   }
 
-  add_enums :years_experience, :expertise, :company, :project, :service, :technology
+  add_enums :years_experience, :context
 
   def self.secondary_activity_map
     {

@@ -30,8 +30,7 @@ class UserExperienceMethod < ActiveRecord::Base
     'Solvency II' => 23,
     'TOGAF' => 24,
     'VMWare' => 25,
-    'Waterfall' => 26,
-    'Other' => 27
+    'Waterfall' => 26
   }
 
   enum secondary_activity: {
@@ -66,7 +65,7 @@ class UserExperienceMethod < ActiveRecord::Base
     'VCP' => 29
   }
 
-  add_enums :years_experience, :expertise
+  add_enums :years_experience
 
   def self.secondary_activity_map
     {

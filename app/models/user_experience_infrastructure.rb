@@ -52,7 +52,7 @@ class UserExperienceInfrastructure < ActiveRecord::Base
     'Mitel' => 29
   }
 
-  add_enums :years_experience, :expertise, :company, :project, :service
+  add_enums :years_experience, :context
 
   def self.secondary_activity_map
     {

@@ -18,7 +18,7 @@ class UserExperienceInfrastructuresController < ApplicationController
 
   def user_experience_infrastructures_params
     params.require(:user_experience_infrastructure).permit(
-      :user_id, :primary_activity, :secondary_activity, :years_experience, :expertise, :company, :project, :service,
+      :user_id, :primary_activity, :secondary_activity, :years_experience, :context,
       :in_last_five_years, :other_primary_activity, :other_secondary_activity
     )
   end

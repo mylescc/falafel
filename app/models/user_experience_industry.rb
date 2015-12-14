@@ -64,7 +64,7 @@ class UserExperienceIndustry < ActiveRecord::Base
     'Energy' => 25
   }
 
-  add_enums :years_experience, :company
+  add_enums :years_experience
 
   def self.secondary_activity_map
     {

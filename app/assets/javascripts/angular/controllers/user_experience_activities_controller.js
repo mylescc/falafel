@@ -7,6 +7,7 @@
       $scope.updateSecondaryActivities();
       $scope.updatePrimaryVisibilities();
       $scope.updateSecondaryVisibilities();
+      $scope.updateButtonEnabled(value);
     });
 
     $scope.updateSecondaryActivities = function(){
@@ -36,6 +37,10 @@
 
     $scope.cancelOtherSecondaryActivity = function(){
       $scope.selectedSecondaryActivity = '';
+    }
+
+    $scope.updateButtonEnabled = function(selectedPrimaryValue){
+      $scope.buttonEnabled = !!selectedPrimaryValue
     }
   };
 

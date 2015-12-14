@@ -81,7 +81,7 @@ class UserExperienceRole < ActiveRecord::Base
     'Service Transition' => 48
   }
 
-  add_enums :years_experience, :expertise, :company
+  add_enums :years_experience, :company
 
   def self.secondary_activity_map
     {
