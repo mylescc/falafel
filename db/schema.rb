@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214113650) do
+ActiveRecord::Schema.define(version: 20151214173100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,11 +58,13 @@ ActiveRecord::Schema.define(version: 20151214113650) do
   end
 
   create_table "references", force: :cascade do |t|
-    t.string  "referee_first_name"
-    t.string  "referee_last_name"
-    t.string  "referee_email"
-    t.text    "referee_email_text"
-    t.integer "user_id"
+    t.string   "referee_first_name"
+    t.string   "referee_last_name"
+    t.string   "referee_email"
+    t.text     "referee_email_text"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "references", ["user_id"], name: "index_references_on_user_id", using: :btree

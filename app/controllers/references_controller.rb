@@ -17,6 +17,17 @@ class ReferencesController < ApplicationController
     end
   end
 
+  def show
+    @reference = Reference.find(params[:id])
+  end
+
+  def destroy
+    @reference = Reference.find(params[:id])
+    @reference.destroy
+    flash[:notice] = "Reference deleted..."
+    redirect_to references_path
+  end
+
   def send_reminder_email
     @reference = Reference.find(params[:id])
     @reference.send_reminder_email

@@ -1,6 +1,6 @@
 <div ng-controller='ReferencesController'>
   <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
-    Request Profile Verification
+    Request Reference
   </button>
   <h2>References</h2>
   <div id="add-reference-form" ng-init="formVisible=!<%=@reference.errors.empty?%>" ng-show='formVisible'>
@@ -26,21 +26,22 @@
           <%= image_tag 'referee_placeholder.png', class: 'referee' %>
           <div>
             <h4><%= ref.referee_first_name%> <%= ref.referee_last_name%></h4>
-            <p>
-              <span class="glyphicon glyphicon-remove"></span>
-              Verified Experience
-            </p>
-            <p>
-              <span class="glyphicon glyphicon-remove"></span>
-              Verified Competencies
-            </p>
-            <%= form_for :reference, url: send_reminder_email_reference_path(ref.id) do |f|%>
-              <%= f.button :button, class: 'btn-default btn' do%>
-                Nudge to Complete
-              <%-end-%>
-
-            <%- end -%>
-
+            <ul>
+              <li>Request Date: <%= ref.created_at.strftime("%d/%m/%Y") %></li>
+              <li>Response Date: </li>
+              <li>
+                <%= link_to "View Reference", reference_path(ref.id), class: "btn btn-primary"%> 
+                <%= form_for ref, method: :delete do |f|%>
+                  <%= f.button :button, class: 'btn-danger btn' do%>
+                    Delete Reference
+                  <%-end-%>
+                <%- end -%>
+                <%= form_for :reference, url: send_reminder_email_reference_path(ref.id) do |f|%>
+                  <%= f.button :button, class: 'btn-default btn' do%>
+                    Nudge to Complete
+                  <%-end-%>
+                <%- end -%>
+            </ul>
           </div>
         </div>
       <%- end -%>

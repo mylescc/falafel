@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :qualifications, only: [:index, :create, :destroy]
   resources :achievements, only: [:index, :create, :destroy]
-  resources :references, only: [:index, :create] do
+  resources :references, only: [:index, :create, :destroy, :show] do
     member { post :send_reminder_email }
   end
   resource :video_statement, only: [:show, :create]
