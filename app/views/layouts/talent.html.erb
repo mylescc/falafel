@@ -15,7 +15,9 @@
           <ul class="nav nav-pills nav-stacked">
             <li><%= link_to 'Basic Details', nav_personal_details_link(current_user)  %></li>
             <li><%= link_to 'Role Preferences', roles_show_path %></li>
-            <li><%= link_to 'Video Statement', video_statement_path%></li>
+            <li data-no-turbolink>
+              <%= link_to 'Video Statement', video_statements_path%>
+            </li>
             <li><%= link_to 'Experience', experience_path%></li>
             <li><%= link_to 'Competencies', competencies_path%></li>
             <li><%= link_to 'Qualifications', qualifications_path%></li>

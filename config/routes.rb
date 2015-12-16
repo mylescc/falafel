@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :references, only: [:index, :create, :destroy, :show] do
     member { post :send_reminder_email }
   end
-  resource :video_statement, only: [:show, :create]
+  resources :video_statements, only: [:index, :create, :destroy]
 
   controller :roles do
     get   'roles/show'     => :show

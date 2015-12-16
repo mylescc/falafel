@@ -1,15 +1,28 @@
 class VideoStatementsController < ApplicationController
   layout 'talent'
 
-  def show
+  def index
+    #GP the user should only ever have one but index seemed more appropriate than show
     @video_statement = VideoStatement.where(user_id: current_user.id).last
   end
 
   def create
+    #GP we need to delete the previous video so as the user only keeps one. Maybe the subsequent would
+    #be more appropriate as an update but to keep it simple for now...
     @video_statement = VideoStatement.new(parsed_params[:video_statement])
-    if @video_statement.save
-      redirect_to video_statement_path
+
+    VideoStatement.transaction do
+      VideoStatement.where(user_id: current_user.id).destroy_all
+      @video_statement.save!
+      redirect_to video_statements_path
     end
+  end
+
+  def destroy
+    @video_statement = VideoStatement.find(params[:id])
+    @video_statement.destroy
+    flash[:notice] = "Video successfully removed..."
+    redirect_to video_statements_path
   end
 
   private

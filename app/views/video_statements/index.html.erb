@@ -1,24 +1,44 @@
-<script src='//cameratag.com/api/v6/js/cameratag.js' type='text/javascript'></script>
 <div ng-controller='VideoStatementsController'>
-  <button class="btn btn-success pull-right" ng-hide='formVisible' ng-click='formVisible = !formVisible'>
-    Record A Video
+  <button ng-init="formVisible=<%=@video_statement.nil?%>" class="btn btn-success pull-right ng-hide" 
+                                                           ng-hide='formVisible' ng-click='formVisible = !formVisible'>
+    Create/Edit Video
   </button>
 
-  <h2>Video Statement</h2>
-  <div ng-show='!formVisible'>
+  <h2>Video</h2>
+  <div ng-hide='formVisible'>
     <%- if @video_statement -%>
-      <video id='rando' data-uuid='["<%=@video_statement.uuid %>"]'></video>
-    <%- else -%>
-      <div ng-init="formVisible=true"></div>
+        <video id='rando' data-uuid='["<%=@video_statement.uuid %>"]'></video>
+        <%= form_tag video_statement_path(@video_statement.id), method: :delete do %>
+          <button class="btn btn-danger">Delete</button>
+        <%- end -%>
     <%- end -%>
   </div>
+
 
   <div id="add-video_statement-form" ng-init="" ng-show='formVisible'>
     <div class="row">
       <div class="col-md-5">
         <h3>Record Your Video</h3>
-        <%= form_tag video_statement_path, id: 'camera_form', method: :post do%>
-          <camera id='VideoStatementCamera' data-app-id='a-03050ce0-606f-0133-7948-22000b789ce2'></camera>
+        Instructions: 
+        <ul>
+          <li>
+            Your video should not exceed 45secs
+          </li>
+          <li>
+            Practice a couple of times using re-record before posting
+          </li>
+          <li>
+            Look directly in to the camera, only film your face
+          </li>
+          <li>
+            Communicate as naturally as possible
+          </li>
+          <li>
+            Don’t refer to salary / rate or location as this may exclude you from potential opportunities
+          </li>
+        </ul>
+        <%= form_tag video_statements_path, id: 'camera_form', method: :post do%>
+          <camera id='VideoStatementCamera' data-app-id='a-03050ce0-606f-0133-7948-22000b789ce2' data-max-length='45'></camera>
         <%- end -%>
         <div class="form-button-container">
           <a ng-click="formVisible = false">
