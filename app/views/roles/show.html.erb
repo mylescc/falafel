@@ -1,6 +1,8 @@
 <script type="text/javascript">
   angular.module('Fused4').constant('Roles',
    <%= @roles.to_json.html_safe %>);
+    angular.module('Fused4').constant('Positions',
+   <%= Role.positions.to_json.html_safe %>);
 </script>
 <div ng-controller='RoleController as ctrl'>
   <h2>Role Preferences</h2>
@@ -12,6 +14,13 @@
             ng-class="{'selected': ctrl.currentRole === role}"
             ng-click="ctrl.showRole($index)">
         Role {{ $index + 1 }}
+        <div class="role-position-container">
+          <%= select_tag("position", options_for_select(Role.positions),
+                          'ng-model': "ctrl.roles[$index].position",
+                          prompt: 'Select',
+                          class: ' form-control') %>
+        </div>
+        <p class="hidden-xs"><b>({{ !!role.position ? ctrl.getRoleValue(role.position) : 'Role not set' }})</b></p>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ class RolesController < ApplicationController
   layout 'talent'
 
   def show
-    @roles = user_roles
+    @roles = roles_as_hash(user_roles)
     @role_distances = RoleDistance.all
     @travel_willingness_options = RoleTravelWillingnessOption.all
   end
@@ -16,12 +16,20 @@ class RolesController < ApplicationController
     return render json: { roles: user_roles }
   end
 
+
+
   private
 
   def user_roles
     existing = current_user.roles.reverse
     remainder = (1..(3-existing.count)).map{ |_| Role.new(user: current_user) }
     existing + remainder
+  end
+
+  def roles_as_hash(roles)
+    roles.map do |role|
+      role.attributes
+    end
   end
 
   def update_roles_params
