@@ -1,9 +1,35 @@
 <h2>Competencies</h2>
 <div ng-controller='CompetenciesController'>
-  <ul ui-sortable='sortableOptions' ng-model='userCompetencies' class='sortable-list'>
-    <li ng-repeat='uc in userCompetencies'>
-      <span class="glyphicon glyphicon-align-justify drag-handle" aria-hidden="true"></span>
-      {{uc.competency}}
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>My Competencies</h3>
+      <ul ui-sortable='userCompetenciesOptions' ng-model='userCompetencies' 
+        ng-init='userCompetencies = <%= @user_competencies.to_json %>'
+        class='sortable-list competencies-container'>
+        <li ng-repeat='uc in userCompetencies'>
+          <span class="glyphicon glyphicon-align-justify drag-handle" aria-hidden="true"></span>
+          {{uc.competency}}
+        </li>
+        <li ng-hide='userCompetencies.length > 5'>
+          Drag a competency from the list on the right 
+        </li>
+        <li ng-show='userCompetencies.length > 5'>
+          You have selected six competencies. Drag them into order of importance and save to add them to your profile.
+          To replace a competency drag it back to the 'available' list and select another.
+        </li>
+      </ul>
+      <button class='btn btn-success' ng-click='save()'>Save</button>
+    </div>
+    <div class="col-md-6">
+      <h3>Available Competencies</h3>
+      <ul ui-sortable='availableCompetenciesOptions' ng-model='availableCompetencies' 
+         ng-init='availableCompetencies = <%= UserCompetency.unassigned_competencies(current_user.id).to_json %>' 
+         class='sortable-list col-md-6 competencies-container'>
+         <li ng-repeat='uc in availableCompetencies'>
+           <span class="glyphicon glyphicon-align-justify drag-handle" aria-hidden="true"></span>
+           {{uc.competency}}
+         </li>
+      </ul>
+    </div>
+  </div>
 </div>

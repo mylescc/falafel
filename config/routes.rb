@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   resources :user_experience_languages, only: [:create, :destroy]
   resources :user_experience_infrastructures, only: [:create, :destroy]
 
-  resources :competencies, only: [:index] do
-    collection { post :reorder }
+  resources :competencies, only: [:index, :destroy] do
+    collection { post :save_list }
   end
 
   resources :qualifications, only: [:index, :create, :destroy]

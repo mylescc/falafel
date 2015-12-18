@@ -3,17 +3,24 @@
 
   function CompetenciesController($scope, Competency){
     $scope.userCompetencies = [];
+    $scope.availableCompetencies = [];
 
-    $scope.loadCompetencies = function(){
-      Competency.query().then(function(results){
-        $scope.userCompetencies = results.data;
-      });
-    }();
+    $scope.userCompetenciesOptions = {
+      connectWith: '.competencies-container'
+    }
 
-    $scope.sortableOptions = {
-      stop: function(){
-        Competency.saveAll($scope.userCompetencies)
-      }
+    $scope.availableCompetenciesOptions = {
+      connectWith: '.competencies-container',
+      update: function(e, ui){ $scope.checkOnlySixCompetencies(e, ui) }
+    }
+
+    $scope.save = function(){
+      Competency.saveList($scope.userCompetencies)
+    }
+
+    $scope.checkOnlySixCompetencies = function(e, ui){
+      if($scope.userCompetencies.length > 5)
+        ui.item.sortable.cancel();
     }
   }
 

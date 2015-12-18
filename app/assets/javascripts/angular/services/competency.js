@@ -12,11 +12,11 @@
       });
     }
 
-    Competency.saveAll = function(competencies){
+    Competency.saveList = function(competencies){
       var current_rank = 0;
       return $http({
         method: 'POST',
-        url: '/competencies/reorder.json',
+        url: '/competencies/save_list.json',
         data: competencies.map(function(c){
           c.rank = ++current_rank;
           return c;

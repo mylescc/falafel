@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_one :personal_detail, foreign_key: :user_id
   has_many :roles, foreign_key: :user_id
+  has_many :user_competencies
 end
