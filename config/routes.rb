@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   end
   resources :video_statements, only: [:index, :create, :destroy]
 
+  resource :validate_profile, only: [:show]
+
   controller :roles do
     get   'roles/show'     => :show
     patch 'roles/update'   => :update

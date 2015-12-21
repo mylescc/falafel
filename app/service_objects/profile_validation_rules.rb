@@ -1,0 +1,3 @@
+module ProfileValidationRules
+
+end

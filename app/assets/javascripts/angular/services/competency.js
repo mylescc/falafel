@@ -5,13 +5,6 @@
 
     function Competency(){};
 
-    Competency.query = function(){
-      return $http({
-        method: 'GET',
-        url: '/competencies.json'
-      });
-    }
-
     Competency.saveList = function(competencies){
       var current_rank = 0;
       return $http({

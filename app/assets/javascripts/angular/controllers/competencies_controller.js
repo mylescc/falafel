@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function CompetenciesController($scope, Competency){
+  function CompetenciesController($rootScope, $scope, Competency){
     $scope.userCompetencies = [];
     $scope.availableCompetencies = [];
 
@@ -24,6 +24,7 @@
 
     $scope.save = function(){
       Competency.saveList($scope.userCompetencies)
+      $rootScope.$broadcast("profileUpdated");
     }
 
     $scope.checkOnlySixCompetencies = function(e, ui){
@@ -33,6 +34,6 @@
 
   }
 
-  CompetenciesController.$inject = ['$scope', 'Competency'];
+  CompetenciesController.$inject = ['$rootScope', '$scope', 'Competency'];
   angular.module('Fused4').controller('CompetenciesController', CompetenciesController);
 })();
