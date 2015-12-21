@@ -1,4 +1,10 @@
 <h2>Competencies</h2>
+<ul>
+  <li> Drag your 6 core competencies from the 'Available' list in to 'My Competencies' </li>
+  <li> Order them (up/down) based on your expertise </li>
+  <li> To change a competency drag it back to the 'Available' list and select another </li>
+  <li> Your selections will automatically be saved </li>
+</ul>
 <div ng-controller='CompetenciesController'>
   <div class="row">
     <div class="col-md-6">
@@ -10,15 +16,18 @@
           <span class="glyphicon glyphicon-align-justify drag-handle" aria-hidden="true"></span>
           {{uc.competency}}
         </li>
-        <li ng-hide='userCompetencies.length > 5'>
+        <li ng-hide='userCompetencies.length > 0'>
           Drag a competency from the list on the right 
         </li>
         <li ng-show='userCompetencies.length > 5'>
-          You have selected six competencies. Drag them into order of importance and save to add them to your profile.
+          You have selected six competencies. Drag them into order of importance.
           To replace a competency drag it back to the 'available' list and select another.
         </li>
+        <li ng-hide='userCompetencies.length == 0 ||
+          userCompetencies.length > 5'>
+          Drag another competency from the list on the right 
+        </li>
       </ul>
-      <button class='btn btn-success' ng-click='save()'>Save</button>
     </div>
     <div class="col-md-6">
       <h3>Available Competencies</h3>

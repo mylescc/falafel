@@ -19,24 +19,13 @@ class CompetenciesController < ApplicationController
   end
 
   def save_list
+    user_id = current_user.id
     respond_to do |format|
       format.json do
         competencies = JSON.parse(request.body.read)
-        UserCompetency.save_list(competencies)
+        UserCompetency.save_list(user_id, competencies)
         render status: 200, json: {ok: true}
       end
     end
   end
-
-  #def reorder
-    #respond_to do |format|
-      #format.json do
-        #JSON.parse(request.body.read).each do |comp_hash|
-          #UserCompetency.where(id: comp_hash["id"]).update_all(rank: comp_hash["rank"])
-        #end
-        #render status: 200, json: {ok: true}
-      #end
-    #end
-  #end
-
 end
