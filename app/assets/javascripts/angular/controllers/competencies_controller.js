@@ -23,8 +23,9 @@
     }
 
     $scope.save = function(){
-      Competency.saveList($scope.userCompetencies)
-      $rootScope.$broadcast("profileUpdated");
+      Competency.saveList($scope.userCompetencies).then(function(){
+        $rootScope.$broadcast("profileUpdated");
+      });
     }
 
     $scope.checkOnlySixCompetencies = function(e, ui){
