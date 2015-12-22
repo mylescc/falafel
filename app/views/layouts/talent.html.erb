@@ -25,6 +25,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('basic_details')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('basic_details').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
@@ -43,6 +45,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('role_preferences')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('role_preferences').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
@@ -61,6 +65,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('video_statement')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('video_statement').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
@@ -79,6 +85,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('experience')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('experience').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
@@ -97,6 +105,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('competencies')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('competencies').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
@@ -115,6 +125,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('qualifications')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('qualifications').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
@@ -133,6 +145,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('achievements')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('achievements').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
@@ -151,6 +165,8 @@
                   class='text-danger'>
                   {{error}}
                 </li>
+              </ul>
+              <ul ng-show="profileValidationSummary.sectionHasRecommendations('references')">
                 <li ng-repeat="recommendation in profileValidationSummary.forSection('references').recommendations" 
                   class='text-warning'>
                   {{recommendation}}
