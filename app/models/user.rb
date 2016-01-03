@@ -9,5 +9,12 @@ class User < ActiveRecord::Base
   has_many :user_competencies
   has_many :references
   has_one :video_statement
-  has_many :user_competencies
+  has_many :user_experience_roles
+  has_many :user_experience_industries
+  has_many :user_experience_management_skills
+  has_many :user_experience_methods
+  has_many :user_experience_applications
+  has_many :user_experience_languages
+  has_many :user_experience_infrastructures
+
 end

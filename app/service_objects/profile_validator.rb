@@ -4,7 +4,8 @@ class ProfileValidator
     ProfileValidationRules::RolePreferencesComplete,
     ProfileValidationRules::VideoStatementPresent,
     ProfileValidationRules::CompetenciesComplete,
-    ProfileValidationRules::ReferencesComplete
+    ProfileValidationRules::ReferencesComplete,
+    ProfileValidationRules::ExperienceComplete
   ]
 
   def initialize(user)
