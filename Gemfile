@@ -51,4 +51,5 @@ group :development, :test do
   gem 'pry-byebug', '~> 2.0.0'
   gem 'spring'
   gem 'dotenv-rails', '2.0.2'
+  gem 'factory_girl_rails'
 end
