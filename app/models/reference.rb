@@ -14,6 +14,10 @@ class Reference < ActiveRecord::Base
     ReferenceMailer.verification_reminder_email(self).deliver_now
   end
 
+  def referee_link
+    Rails.application.routes.url_helpers.edit_reference_url(guid: self.guid)
+  end
+
 private
 
   def create_guid

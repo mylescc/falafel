@@ -50,4 +50,5 @@ Rails.application.configure do
     :authentication => :cram_md5
   }
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_controller.default_url_options = { :host => 'localhost:3000' }
 end
