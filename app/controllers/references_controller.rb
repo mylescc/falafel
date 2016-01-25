@@ -3,7 +3,7 @@ class ReferencesController < ApplicationController
 
   def index
     load_references
-    @reference = Reference.new(referee_email_text: "I'd like you to verify my work profile on the fused4 talent platform.\n\nbest wishes\n\n#{current_user.email} (need to store first name)")
+    @reference = Reference.new
   end
 
   def create
