@@ -1,8 +1,10 @@
 class Reference < ActiveRecord::Base
-  validates :referee_first_name, :referee_last_name, :referee_email, :referee_email_text, presence: true
+  validates :referee_first_name, :referee_last_name, :referee_email, presence: true
   validates :referee_email, email: true
 
   before_save :create_guid
+
+  belongs_to :user
 
   def save_and_send_request
     result = save

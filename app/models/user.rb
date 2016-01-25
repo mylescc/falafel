@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
+  extend Forwardable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  delegate [:name] => :personal_detail
 
   has_one :personal_detail, foreign_key: :user_id
   has_many :roles, foreign_key: :user_id

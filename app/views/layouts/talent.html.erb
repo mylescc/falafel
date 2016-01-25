@@ -1,188 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <%= render 'layouts/head' %>
-  </head>
-  <body ng-app="Fused4">
-    <%= render 'layouts/navbar' %>
-    <%= render 'layouts/notifications' %>
-
-    <div id="talent-navigation" class="container">
-      <div class="row">
-        <div class="col-sm-3">
-          <h1>Profile</h1>
-          <hr/>
-          <ul class="nav nav-pills nav-stacked" ng-controller='TalentProfileNavigationController'>
-            <li>
-              <%= link_to 'Basic Details', nav_personal_details_link(current_user), class: 'navigation-link' %>
-              <span ng-show="profileValidationSummary.sectionValid('basic_details')" 
+<%= render partial: "layouts/standard_header" %>
+<div id="talent-navigation" class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <h1>Profile</h1>
+      <hr/>
+      <ul class="nav nav-pills nav-stacked" ng-controller='TalentProfileNavigationController'>
+        <li>
+          <%= link_to 'Basic Details', nav_personal_details_link(current_user), class: 'navigation-link' %>
+          <span ng-show="profileValidationSummary.sectionValid('basic_details')" 
                 class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('basic_details')" 
+          <span ng-hide="profileValidationSummary.sectionValid('basic_details')" 
                 class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('basic_details')">
-                <li ng-repeat="error in profileValidationSummary.forSection('basic_details').errors" 
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('basic_details')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('basic_details').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
-            </li>
-            <li>
-              <%= link_to 'Role Preferences', roles_show_path, class: 'navigation-link'%>
-              <span ng-show="profileValidationSummary.sectionValid('role_preferences')" 
-                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('role_preferences')" 
-                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('role_preferences')">
-                <li ng-repeat="error in profileValidationSummary.forSection('role_preferences').errors" 
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('role_preferences')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('role_preferences').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
-            </li>
-            <li data-no-turbolink>
-              <%= link_to 'Video Statement', video_statements_path, class: 'navigation-link'%>
-              <span ng-show="profileValidationSummary.sectionValid('video_statement')" 
-                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('video_statement')" 
-                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('video_statement')">
-                <li ng-repeat="error in profileValidationSummary.forSection('video_statement').errors"
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('video_statement')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('video_statement').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
-            </li>
-            <li>
-              <%= link_to 'Experience', experience_path, class: 'navigation-link'%>
-              <span ng-show="profileValidationSummary.sectionValid('experience')" 
-                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('experience')" 
-                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('experience')">
-                <li ng-repeat="error in profileValidationSummary.forSection('experience').errors"
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('experience')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('experience').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
-            </li>
-            <li>
-              <%= link_to 'Competencies', competencies_path, class: 'navigation-link'%>
-              <span ng-show="profileValidationSummary.sectionValid('competencies')" 
-                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('competencies')" 
-                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('competencies')">
-                <li ng-repeat="error in profileValidationSummary.forSection('competencies').errors"
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('competencies')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('competencies').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
-            </li>
-            <li>
-              <%= link_to 'Qualifications', qualifications_path, class: 'navigation-link'%>
-              <span ng-show="profileValidationSummary.sectionValid('qualifications')" 
-                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('qualifications')" 
-                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('qualifications')">
-                <li ng-repeat="error in profileValidationSummary.forSection('qualifications').errors"
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('qualifications')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('qualifications').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
-            </li>
-            <li>
-              <%= link_to 'Achievements', achievements_path, class: 'navigation-link'%>
-              <span ng-show="profileValidationSummary.sectionValid('achievements')" 
-                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('achievements')" 
-                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('achievements')">
-                <li ng-repeat="error in profileValidationSummary.forSection('achievements').errors"
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('achievements')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('achievements').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
-            </li>
-            <li>
-              <%= link_to 'References', references_path, class: 'navigation-link'%>
-              <span ng-show="profileValidationSummary.sectionValid('references')" 
-                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
-              <span ng-hide="profileValidationSummary.sectionValid('references')" 
-                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
-              <div class="clearfix"></div>
-              <ul ng-hide="profileValidationSummary.sectionValid('references')">
-                <li ng-repeat="error in profileValidationSummary.forSection('references').errors"
-                  class='text-danger'>
-                  {{error}}
-                </li>
-              </ul>
-              <ul ng-show="profileValidationSummary.sectionHasRecommendations('references')">
-                <li ng-repeat="recommendation in profileValidationSummary.forSection('references').recommendations" 
-                  class='text-warning'>
-                  {{recommendation}}
-                </li>
-              </ul>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('basic_details')">
+            <li ng-repeat="error in profileValidationSummary.forSection('basic_details').errors" 
+                class='text-danger'>
+              {{error}}
             </li>
           </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('basic_details')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('basic_details').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to 'Role Preferences', roles_show_path, class: 'navigation-link'%>
+          <span ng-show="profileValidationSummary.sectionValid('role_preferences')" 
+                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
+          <span ng-hide="profileValidationSummary.sectionValid('role_preferences')" 
+                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('role_preferences')">
+            <li ng-repeat="error in profileValidationSummary.forSection('role_preferences').errors" 
+                class='text-danger'>
+              {{error}}
+            </li>
+          </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('role_preferences')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('role_preferences').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+        <li data-no-turbolink>
+          <%= link_to 'Video Statement', video_statements_path, class: 'navigation-link'%>
+          <span ng-show="profileValidationSummary.sectionValid('video_statement')" 
+                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
+          <span ng-hide="profileValidationSummary.sectionValid('video_statement')" 
+                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('video_statement')">
+            <li ng-repeat="error in profileValidationSummary.forSection('video_statement').errors"
+                class='text-danger'>
+              {{error}}
+            </li>
+          </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('video_statement')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('video_statement').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to 'Experience', experience_path, class: 'navigation-link'%>
+          <span ng-show="profileValidationSummary.sectionValid('experience')" 
+                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
+          <span ng-hide="profileValidationSummary.sectionValid('experience')" 
+                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('experience')">
+            <li ng-repeat="error in profileValidationSummary.forSection('experience').errors"
+                class='text-danger'>
+              {{error}}
+            </li>
+          </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('experience')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('experience').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to 'Competencies', competencies_path, class: 'navigation-link'%>
+          <span ng-show="profileValidationSummary.sectionValid('competencies')" 
+                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
+          <span ng-hide="profileValidationSummary.sectionValid('competencies')" 
+                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('competencies')">
+            <li ng-repeat="error in profileValidationSummary.forSection('competencies').errors"
+                class='text-danger'>
+              {{error}}
+            </li>
+          </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('competencies')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('competencies').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to 'Qualifications', qualifications_path, class: 'navigation-link'%>
+          <span ng-show="profileValidationSummary.sectionValid('qualifications')" 
+                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
+          <span ng-hide="profileValidationSummary.sectionValid('qualifications')" 
+                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('qualifications')">
+            <li ng-repeat="error in profileValidationSummary.forSection('qualifications').errors"
+                class='text-danger'>
+              {{error}}
+            </li>
+          </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('qualifications')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('qualifications').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to 'Achievements', achievements_path, class: 'navigation-link'%>
+          <span ng-show="profileValidationSummary.sectionValid('achievements')" 
+                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
+          <span ng-hide="profileValidationSummary.sectionValid('achievements')" 
+                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('achievements')">
+            <li ng-repeat="error in profileValidationSummary.forSection('achievements').errors"
+                class='text-danger'>
+              {{error}}
+            </li>
+          </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('achievements')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('achievements').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to 'References', references_path, class: 'navigation-link'%>
+          <span ng-show="profileValidationSummary.sectionValid('references')" 
+                class="glyphicon glyphicon-ok text-success navigation-indicator"></span>
+          <span ng-hide="profileValidationSummary.sectionValid('references')" 
+                class="glyphicon glyphicon-remove text-danger navigation-indicator"></span>
+          <div class="clearfix"></div>
+          <ul ng-hide="profileValidationSummary.sectionValid('references')">
+            <li ng-repeat="error in profileValidationSummary.forSection('references').errors"
+                class='text-danger'>
+              {{error}}
+            </li>
+          </ul>
+          <ul ng-show="profileValidationSummary.sectionHasRecommendations('references')">
+            <li ng-repeat="recommendation in profileValidationSummary.forSection('references').recommendations" 
+                class='text-warning'>
+              {{recommendation}}
+            </li>
+          </ul>
+        </li>
+      </ul>
 
-        </div>
-        <div class="col-sm-9">
-
-          <%= yield %>
-
-        </div>
-      </div>
     </div>
-    <footer class="footer"></footer>
-  </body>
-</html>
+    <div class="col-sm-9">
+
+      <%= yield %>
+
+    </div>
+  </div>
+</div>
+<%= render partial: "layouts/standard_footer" %>

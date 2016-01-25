@@ -1,5 +1,5 @@
 class ReferencesController < ApplicationController
-  layout 'talent'
+  layout :set_layout
 
   def index
     load_references
@@ -15,6 +15,10 @@ class ReferencesController < ApplicationController
       load_references
       render :index
     end
+  end
+
+  def edit
+    @reference = Reference.where(guid: params[:guid]).last
   end
 
   def show
@@ -47,4 +51,14 @@ class ReferencesController < ApplicationController
   def load_references
     @references = Reference.where(user_id: current_user.id)
   end
+
+  def set_layout
+    case action_name
+    when 'edit'
+      'referee'
+    else
+      'talent'
+    end
+  end
+
 end
