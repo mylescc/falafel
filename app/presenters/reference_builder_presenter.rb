@@ -27,9 +27,16 @@ class ReferenceBuilderPresenter
     "references/#{experience.class.to_s.underscore}"
   end
 
+  def primary_activity(experience)
+    experience.other_primary_activity.blank? ? experience.primary_activity : experience.other_primary_activity
+  end
+
+  def secondary_activity(experience)
+    experience.other_secondary_activity.blank? ? experience.secondary_activity :  experience.other_secondary_activity
+  end
+
   def has_secondary_activity?(experience)
-    other_secondary_entered?(experience) ||
-      experience.secondary_activity.present?
+    secondary_activity(experience).present?
   end
 
   def other_secondary_entered?(experience)

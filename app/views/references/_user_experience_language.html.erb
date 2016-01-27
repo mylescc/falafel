@@ -2,10 +2,10 @@
 <div class="experience-row">
   <dl>
     <dt>Language: </dt>
-    <dd><%= experience.other_primary_activity.blank? ? experience.primary_activity : experience.other_primary_activity %></dd>
+    <dd><%= @reference_builder_presenter.primary_activity(experience) %></dd>
     <%- if @reference_builder_presenter.has_secondary_activity?(experience) -%>
       <dt>Experience: </dt>
-      <dd><%= experience.other_secondary_activity.blank? ? experience.secondary_activity :  experience.other_secondary_activity %></dd>
+      <dd><%= @reference_builder_presenter.secondary_activity(experience) %></dd>
     <%- end -%>
     <dt>Context: </dt>
     <dd><%= experience.context %></dd>
