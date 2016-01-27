@@ -13,12 +13,21 @@
   </ol>
 </p>
 
-<h2>Competencies</h2>
-<p>
-  Please select 6 competencies from the list provided that you feel best reflects the expertise and strengths of <%= @reference.user.name%>
-</p> 
+<div id="reference-builder">
+  <div id="experience">
+    <%- @reference_builder_presenter.all_experience.each do |experience| %>
+      <%= render partial: @reference_builder_presenter.partial_path(experience), 
+        object: experience, as: 'experience'  %>
+    <%- end -%>
 
-<h2>Relationship</h2>
-<p>
-  Please select a value from the list which best describes in what capacity you know <%= @reference.user.name %>
-</p>
+    <h2>Competencies</h2>
+    <p>
+      Please select 6 competencies from the list provided that you feel best reflects the expertise and strengths of <%= @reference.user.name%>
+    </p> 
+
+    <h2>Relationship</h2>
+    <p>
+      Please select a value from the list which best describes in what capacity you know <%= @reference.user.name %>
+    </p>
+  </div>
+</div>

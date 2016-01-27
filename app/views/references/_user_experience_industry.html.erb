@@ -1,0 +1,13 @@
+<!-- references/_user_experience_industry.html.erb -->
+<div class="experience-row">
+  <dl>
+    <dt>Industry: </dt>
+    <dd><%= experience.other_primary_activity.blank? ? experience.primary_activity : experience.other_primary_activity %></dd>
+    <%- if @reference_builder_presenter.has_secondary_activity?(experience) -%>
+      <dt>Experience: </dt>
+      <dd><%= experience.other_secondary_activity.blank? ? experience.secondary_activity :  experience.other_secondary_activity %></dd>
+    <%- end -%>
+    <dt>Years Experience: </dt>
+    <dd><%= experience.years_experience %></dd>
+  </dl>
+</div>

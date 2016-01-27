@@ -19,6 +19,7 @@ class ReferencesController < ApplicationController
 
   def edit
     @reference = Reference.where(guid: params[:guid]).last
+    @reference_builder_presenter = ReferenceBuilderPresenter.load(@reference)
   end
 
   def show
