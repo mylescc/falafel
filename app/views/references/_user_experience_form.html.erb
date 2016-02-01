@@ -1,0 +1,39 @@
+<div ng-controller="ExperienceReferenceFormController" class="experience-reference-form">
+  <div ng-hide="formVisible || tickVisible || crossVisible" ng-init="formVisible = false">
+    <button class="btn btn-success" ng-click="formVisible = true">
+      I have experience
+    </button>
+    <button class="btn btn-danger" ng-click="crossVisible = true">
+      I have no experience
+    </button>
+  </div>
+  <form class="form-inline" ng-show="formVisible">
+    <div class="form-group">
+      <label for="">Expertise</label>
+      <select id="" name="" class="form-control" ng-model="expertiseSelected" ng-init="expertiseSelected = 'Novice'">
+        <%- ["Novice", "Competent", "Proficient", "Expert"].each_with_index do |exp, i| -%>
+          <option value="<%=exp%>"><%=exp%></option>
+        <%- end -%>
+        <option value=""></option>
+      </select>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox">
+        Last 5 Years
+      </label>
+    </div>
+    <button class="btn btn-success" ng-click="tickVisible = true; formVisible = false">
+      Submit
+    </button>
+  </form>
+  <p ng-show="tickVisible">
+    {{expertiseSelected}}
+    <span class="glyphicon glyphicon-ok text-success experience-indicator"></span>
+  </p>
+  <p ng-show="crossVisible">
+    Unknown
+    <span class="glyphicon glyphicon-remove text-danger experience-indicator"></span>
+  </p>
+</div>
+<div class="clearfix"></div>
