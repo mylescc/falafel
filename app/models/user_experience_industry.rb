@@ -1,9 +1,6 @@
-class UserExperienceIndustry < ActiveRecord::Base
-  include CommonExperienceEnumerations
-  include ActivityMapper
-
-  belongs_to :user
+class UserExperienceIndustry < UserExperience
   #validates :user, :primary_activity, presence: true
+  add_enums :years_experience
 
   enum primary_activity: {
     'Accountancy' => 1,
@@ -63,8 +60,6 @@ class UserExperienceIndustry < ActiveRecord::Base
     'Mining' => 24,
     'Energy' => 25
   }
-
-  add_enums :years_experience
 
   def self.secondary_activity_map
     {

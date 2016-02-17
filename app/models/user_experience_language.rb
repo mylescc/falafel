@@ -1,8 +1,6 @@
-class UserExperienceLanguage < ActiveRecord::Base
-  include CommonExperienceEnumerations
-  include ActivityMapper
-  belongs_to :user
+class UserExperienceLanguage < UserExperience
   #validates :user, :primary_activity, presence: true
+  add_enums :years_experience, :context
 
   enum primary_activity: {
     'COBOL' => 1,
@@ -47,8 +45,6 @@ class UserExperienceLanguage < ActiveRecord::Base
     'WebAPI' => 23,
     'WPF' => 24
   }
-
-  add_enums :years_experience, :context
 
   def self.secondary_activity_map
     {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125061539) do
+ActiveRecord::Schema.define(version: 20160217224909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,124 +108,23 @@ ActiveRecord::Schema.define(version: 20160125061539) do
     t.datetime "updated_at"
   end
 
-  create_table "user_experience_applications", force: :cascade do |t|
+  create_table "user_experiences", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "primary_activity"
-    t.integer  "secondary_activity"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
     t.integer  "years_experience"
-    t.integer  "expertise"
-    t.integer  "company"
-    t.integer  "project"
-    t.integer  "service"
-    t.integer  "technology"
-    t.boolean  "in_last_five_years"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "secondary_activity"
+    t.boolean  "in_last_five_years"
+    t.string   "other_primary_activity"
+    t.string   "other_secondary_activity"
+    t.string   "type"
+    t.integer  "company"
     t.integer  "context"
   end
 
-  add_index "user_experience_applications", ["user_id"], name: "index_user_experience_applications_on_user_id", using: :btree
-
-  create_table "user_experience_industries", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "primary_activity"
-    t.integer  "secondary_activity"
-    t.integer  "years_experience"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
-    t.integer  "company"
-    t.boolean  "in_last_five_years"
-  end
-
-  add_index "user_experience_industries", ["user_id"], name: "index_user_experience_industries_on_user_id", using: :btree
-
-  create_table "user_experience_infrastructures", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "primary_activity"
-    t.integer  "secondary_activity"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
-    t.integer  "years_experience"
-    t.integer  "expertise"
-    t.integer  "company"
-    t.integer  "project"
-    t.integer  "service"
-    t.boolean  "in_last_five_years"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "context"
-  end
-
-  add_index "user_experience_infrastructures", ["user_id"], name: "index_user_experience_infrastructures_on_user_id", using: :btree
-
-  create_table "user_experience_languages", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "primary_activity"
-    t.integer  "secondary_activity"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
-    t.integer  "years_experience"
-    t.integer  "expertise"
-    t.boolean  "in_last_five_years"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "context"
-  end
-
-  add_index "user_experience_languages", ["user_id"], name: "index_user_experience_languages_on_user_id", using: :btree
-
-  create_table "user_experience_management_skills", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "primary_activity"
-    t.integer  "secondary_activity"
-    t.integer  "years_experience"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
-    t.integer  "expertise"
-    t.boolean  "in_last_five_years"
-  end
-
-  add_index "user_experience_management_skills", ["user_id"], name: "index_user_experience_management_skills_on_user_id", using: :btree
-
-  create_table "user_experience_methods", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "primary_activity"
-    t.integer  "secondary_activity"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
-    t.integer  "years_experience"
-    t.integer  "expertise"
-    t.boolean  "in_last_five_years"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_experience_methods", ["user_id"], name: "index_user_experience_methods_on_user_id", using: :btree
-
-  create_table "user_experience_roles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "primary_activity"
-    t.integer  "years_experience"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "secondary_activity"
-    t.integer  "expertise"
-    t.integer  "company"
-    t.boolean  "in_last_five_years"
-    t.string   "other_primary_activity"
-    t.string   "other_secondary_activity"
-  end
-
-  add_index "user_experience_roles", ["company"], name: "index_user_experience_roles_on_company", using: :btree
-  add_index "user_experience_roles", ["expertise"], name: "index_user_experience_roles_on_expertise", using: :btree
-  add_index "user_experience_roles", ["secondary_activity"], name: "index_user_experience_roles_on_secondary_activity", using: :btree
-  add_index "user_experience_roles", ["user_id"], name: "index_user_experience_roles_on_user_id", using: :btree
+  add_index "user_experiences", ["type"], name: "index_user_experiences_on_type", using: :btree
+  add_index "user_experiences", ["user_id"], name: "index_user_experiences_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

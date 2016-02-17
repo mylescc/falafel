@@ -1,8 +1,6 @@
-class UserExperienceMethod < ActiveRecord::Base
-  include CommonExperienceEnumerations
-  include ActivityMapper
-  belongs_to :user
+class UserExperienceMethod < UserExperience
   #validates :user, :primary_activity, presence: true
+  add_enums :years_experience
 
   enum primary_activity: {
     'Agile' => 1,
@@ -64,8 +62,6 @@ class UserExperienceMethod < ActiveRecord::Base
     'Pillar 3' => 28,
     'VCP' => 29
   }
-
-  add_enums :years_experience
 
   def self.secondary_activity_map
     {

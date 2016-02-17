@@ -1,9 +1,6 @@
-class UserExperienceManagementSkill < ActiveRecord::Base
-  include CommonExperienceEnumerations
-  include ActivityMapper
-
-  belongs_to :user
+class UserExperienceManagementSkill < UserExperience
   #validates :user, :industry, :primary_activity, :primary_activity, presence: true
+  add_enums :years_experience
 
   enum primary_activity: {
     'Budget Management' => 1,
@@ -44,7 +41,6 @@ class UserExperienceManagementSkill < ActiveRecord::Base
     'Target Operating Model (TOM)' => 28
   }
 
-  add_enums :years_experience
 
   def self.secondary_activity_map
     {
