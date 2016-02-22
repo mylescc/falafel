@@ -15,7 +15,7 @@
 
 <div id="reference-builder">
   <div id="experience">
-    <%- @reference_builder_presenter.all_experience.each do |experience| %>
+    <%- @reference_builder_presenter.user_experiences.each do |experience| %>
       <%= render partial: @reference_builder_presenter.partial_path(experience), 
         object: experience, as: 'experience'  %>
     <%- end -%>
