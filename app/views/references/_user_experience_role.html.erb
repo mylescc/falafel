@@ -12,5 +12,7 @@
     <dt>Company: </dt>
     <dd><%= experience.company %></dd>
   </dl>
-  <%= render partial: "user_experience_form" %>
+  <%= render partial: "user_experience_form", 
+    locals: { presenter: @reference_builder_presenter, 
+              experience: experience } %>
 </div>

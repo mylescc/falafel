@@ -1,4 +1,8 @@
-<div ng-controller="ExperienceReferenceFormController" class="experience-reference-form">
+<div ng-controller="ExperienceReferenceFormController" 
+     class="experience-reference-form" 
+       ng-init="init(<%= presenter.reference_for_experience(experience.id).to_json %>)">
+
+  <div ng-show="reference">Edit/Delete</div>
   <div ng-hide="formVisible || tickVisible || crossVisible" ng-init="formVisible = false">
     <button class="btn btn-success" ng-click="formVisible = true">
       Yes
