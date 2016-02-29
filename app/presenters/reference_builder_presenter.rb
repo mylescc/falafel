@@ -8,7 +8,9 @@ class ReferenceBuilderPresenter
   def initialize(reference)
     @reference = reference
     @user = @reference.user
-    @user_experiences = UserExperience.where(user_id: @user.id)
+    @user_experiences = UserExperience.where(user_id: user.id)
+    @user_experience_references = UserExperienceReference
+      .where(reference_id: reference.id)
   end
 
   def applications
@@ -58,5 +60,19 @@ class ReferenceBuilderPresenter
   def other_secondary_entered?(experience)
     #handle empty strings that return true if we use present
     !experience.other_secondary_activity.blank?
+  end
+
+  def user
+    @user
+  end
+
+  def user_experience_references
+    @user_experience_references
+  end
+
+  def reference_for_experience(experience_id)
+    user_experience_references.find do |ref|
+      ref.user_experience_id == experience_id
+    end
   end
 end
