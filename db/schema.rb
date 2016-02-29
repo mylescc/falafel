@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217224909) do
+ActiveRecord::Schema.define(version: 20160229203614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,18 @@ ActiveRecord::Schema.define(version: 20160217224909) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_experience_references", force: :cascade do |t|
+    t.integer  "user_experience_id"
+    t.integer  "reference_id"
+    t.integer  "expertise"
+    t.integer  "in_last_five_years"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_experience_references", ["reference_id"], name: "index_user_experience_references_on_reference_id", using: :btree
+  add_index "user_experience_references", ["user_experience_id"], name: "index_user_experience_references_on_user_experience_id", using: :btree
 
   create_table "user_experiences", force: :cascade do |t|
     t.integer  "user_id"
