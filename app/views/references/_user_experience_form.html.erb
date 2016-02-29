@@ -1,20 +1,36 @@
-<div ng-controller="ExperienceReferenceFormController" 
-     class="experience-reference-form" 
-       ng-init="init(<%= presenter.reference_for_experience(experience.id).to_json %>)">
+<div ng-controller="ExperienceReferenceFormController"
+  class="experience-reference-form"
+  ng-init="init(<%= presenter.reference_for_experience(experience.id).to_json %>)">
 
-  <div ng-show="reference">Edit/Delete</div>
-  <div ng-hide="formVisible || tickVisible || crossVisible" ng-init="formVisible = false">
-    <button class="btn btn-success" ng-click="formVisible = true">
+  <div ng-show="formStateIs('known')" class="experience-panel">
+    <p>
+      {{reference.expertise}}
+      <span class="glyphicon glyphicon-ok text-success experience-indicator"></span>
+    </p>
+    <a href="" ng-click="setFormState('edit')">Edit</a>/<a href="" ng-click="delete()">Delete</a>
+  </div>
+
+  <div ng-show="formStateIs('noKnowledge')" class="experience-panel">
+    <p>
+      Unknown
+      <span class="glyphicon glyphicon-remove text-danger experience-indicator"></span>
+    </p>
+    <a href="" ng-click="setFormState('edit')">Edit</a>
+  </div>
+
+  <div ng-show="formStateIs('initial')">
+    <button class="btn btn-success" ng-click="setFormState('edit')">
       Yes
     </button>
-    <button class="btn btn-danger" ng-click="crossVisible = true">
-      No 
+    <button class="btn btn-danger" ng-click="save()">
+      No
     </button>
   </div>
-  <form class="form-inline" ng-show="formVisible">
+
+  <form class="form-inline" ng-show="formStateIs('edit')">
     <div class="form-group">
       <label for="">Expertise</label>
-      <select id="" name="" class="form-control" ng-model="expertiseSelected" ng-init="expertiseSelected = 'Novice'">
+      <select id="" name="" class="form-control" ng-model="reference.expertise">
         <%- ["Novice", "Competent", "Proficient", "Expert"].each_with_index do |exp, i| -%>
           <option value="<%=exp%>"><%=exp%></option>
         <%- end -%>
@@ -23,21 +39,14 @@
     </div>
     <div class="checkbox">
       <label>
-        <input type="checkbox">
+        <input type="checkbox" ng-model="reference.in_last_five_years">
         Last 5 Years
       </label>
     </div>
-    <button class="btn btn-success" ng-click="tickVisible = true; formVisible = false">
+    <button class="btn btn-success" ng-click="save()">
       Submit
     </button>
+    <a ng-click="cancelForm()">Cancel</a>
   </form>
-  <p ng-show="tickVisible">
-    {{expertiseSelected}}
-    <span class="glyphicon glyphicon-ok text-success experience-indicator"></span>
-  </p>
-  <p ng-show="crossVisible">
-    Unknown
-    <span class="glyphicon glyphicon-remove text-danger experience-indicator"></span>
-  </p>
 </div>
 <div class="clearfix"></div>

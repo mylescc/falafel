@@ -1,5 +1,5 @@
 class ReferenceBuilderPresenter
-  attr_reader :user_experiences
+  attr_reader :user_experiences, :reference
 
   def self.load(reference)
     ReferenceBuilderPresenter.new(reference)
@@ -73,6 +73,10 @@ class ReferenceBuilderPresenter
   def reference_for_experience(experience_id)
     user_experience_references.find do |ref|
       ref.user_experience_id == experience_id
-    end
+    end || UserExperienceReference.new(
+      user_experience_id: experience_id,
+      reference_id: reference.id,
+    )
+
   end
 end

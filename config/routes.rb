@@ -26,8 +26,10 @@ Rails.application.routes.draw do
   resources :references, only: [:index, :create, :destroy, :show] do
     member { post :send_reminder_email }
   end
+
   get 'submit_reference/:guid' => 'references#edit', :as => 'edit_reference'
   # patch 'submit_reference/:guid' => 'references#update', :as => 'update_reference'
+  resources :user_experience_references,only: [:create, :update]
 
   resources :video_statements, only: [:index, :create, :destroy]
 
