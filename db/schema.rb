@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229203614) do
+ActiveRecord::Schema.define(version: 20160310174230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,9 +112,10 @@ ActiveRecord::Schema.define(version: 20160229203614) do
     t.integer  "user_experience_id"
     t.integer  "reference_id"
     t.integer  "expertise"
-    t.integer  "in_last_five_years"
+    t.boolean  "in_last_five_years"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "referee_has_no_experience", default: true
   end
 
   add_index "user_experience_references", ["reference_id"], name: "index_user_experience_references_on_reference_id", using: :btree
