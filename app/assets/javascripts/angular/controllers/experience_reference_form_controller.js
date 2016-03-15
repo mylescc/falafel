@@ -10,9 +10,9 @@
     }
 
     $scope.updateFormState = function(){
-      if($scope.reference.isNoKnowledge())
-        $scope.setFormState("noKnowledge");
-      else if($scope.reference.isKnown())
+      if($scope.reference.unknown())
+        $scope.setFormState("unknown");
+      else if($scope.reference.known())
         $scope.setFormState("known");
       else
         $scope.setFormState("initial");
@@ -31,15 +31,17 @@
     }
 
     $scope.save = function(){
-      $scope.reference.save().then(function(reference){
+      $scope.reference.persistWithExperience().then(function(reference){
         $scope.reference = reference;
         $scope.updateFormState();
       });
     }
 
-    $scope.delete = function(){
-      $scope.reference.expertise = undefined;
-      $scope.save();
+    $scope.setNoExperience = function(){
+      $scope.reference.setNoExperience().then(function(reference){
+        $scope.reference = reference;
+        $scope.updateFormState();
+      });
     }
   }
 

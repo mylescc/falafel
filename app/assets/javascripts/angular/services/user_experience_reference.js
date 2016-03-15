@@ -16,7 +16,7 @@
         url: '/user_experience_references.json',
         data: this
       }).then(function(result){
-        return new UserExperienceReference(result.data);
+        return new UserExperienceReference(result.data)
       });
     }
 
@@ -25,19 +25,39 @@
         method: 'PUT',
         url: '/user_experience_references/' + this.id + '.json',
         data: this
+      }).then(function(result){
+        return new UserExperienceReference(result.data)
       });
+    }
+
+    UserExperienceReference.prototype.saveOrUpdate = function(){
+      if(this.id)
+        return this.update();
+      else
+        return this.save();
+    }
+
+    UserExperienceReference.prototype.persistWithExperience = function(){
+      this.referee_has_experience = true;
+      return this.saveOrUpdate()
+    }
+
+    UserExperienceReference.prototype.setNoExperience = function(){
+      this.referee_has_experience = false;
+      this.expertise = undefined;
+      return this.saveOrUpdate()
     }
 
     UserExperienceReference.prototype.isNew = function(){
       return this.id == undefined && this.expertise == undefined;
     }
-    
-    UserExperienceReference.prototype.isNoKnowledge = function(){
-      return this.id != undefined && this.expertise == undefined;
+
+    UserExperienceReference.prototype.unknown = function(){
+      return this.id != undefined && !this.referee_has_experience;
     }
 
-    UserExperienceReference.prototype.isKnown = function(){
-      return this.id != undefined && this.expertise != undefined;
+    UserExperienceReference.prototype.known = function(){
+      return this.id != undefined && this.referee_has_experience;
     }
 
     return UserExperienceReference;

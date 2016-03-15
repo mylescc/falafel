@@ -7,10 +7,10 @@
       {{reference.expertise}}
       <span class="glyphicon glyphicon-ok text-success experience-indicator"></span>
     </p>
-    <a href="" ng-click="setFormState('edit')">Edit</a>/<a href="" ng-click="delete()">Delete</a>
+    <a href="" ng-click="setFormState('edit')">Edit</a>/<a href="" ng-click="setNoExperience()">Delete</a>
   </div>
 
-  <div ng-show="formStateIs('noKnowledge')" class="experience-panel">
+  <div ng-show="formStateIs('unknown')" class="experience-panel">
     <p>
       Unknown
       <span class="glyphicon glyphicon-remove text-danger experience-indicator"></span>
@@ -22,7 +22,7 @@
     <button class="btn btn-success" ng-click="setFormState('edit')">
       Yes
     </button>
-    <button class="btn btn-danger" ng-click="save()">
+    <button class="btn btn-danger" ng-click="setNoExperience()">
       No
     </button>
   </div>

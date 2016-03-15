@@ -10,7 +10,7 @@ class UserExperienceReferencesController < ApplicationController
     @user_experience_reference = UserExperienceReference.find(params[:id])
     @user_experience_reference
       .update_attributes!(user_experience_reference_params)
-    head :ok
+    render json: @user_experience_reference, status: :ok
   end
 
 private
@@ -20,6 +20,7 @@ private
       :reference_id,
       :expertise,
       :in_last_five_years,
+      :referee_has_experience,
     )
   end
 end
