@@ -24,6 +24,20 @@
     <p>
       Please select 6 competencies from the list provided that you feel best reflects the expertise and strengths of <%= @reference.user.name%>
     </p> 
+    <%- UserReferenceCompetency.competencies.map{ |enumerated_competency| enumerated_competency[0] }.each do |competency| -%>
+      <div ng-controller="UserReferenceCompetencyController">
+        <div class="competency-panel" ng-class = "{'alert-success': selected}">
+          <%= competency %>
+          <button class="btn btn-success" ng-click="selected = true" ng-hide="selected">
+            Select
+          </button>
+          <button class="btn btn-danger" ng-click="selected = false" ng-show="selected">
+            Deselect
+          </button>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    <%- end -%>
 
     <h2>Relationship</h2>
     <p>
