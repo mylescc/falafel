@@ -24,20 +24,25 @@
     <p>
       Please select 6 competencies from the list provided that you feel best reflects the expertise and strengths of <%= @reference.user.name%>
     </p> 
-    <%- UserReferenceCompetency.competencies.map{ |enumerated_competency| enumerated_competency[0] }.each do |competency| -%>
-      <div ng-controller="UserReferenceCompetencyController">
-        <div class="competency-panel" ng-class = "{'alert-success': selected}">
-          <%= competency %>
-          <button class="btn btn-success" ng-click="selected = true" ng-hide="selected">
+    <div ng-controller="UserReferenceCompetencyListController" 
+         ng-init="referenceId=<%=@reference_builder_presenter.reference.id%>; buildCompetencies(<%=UserReferenceCompetency.competencies.map{ |enumerated_competency| enumerated_competency[0] }%>)">
+      <div ng-repeat="userReferenceCompetency in competencies">
+        <div class="competency-panel col-md-4 pull-left" ng-class = "{'alert-success': userReferenceCompetency.selected}">
+          {{ userReferenceCompetency.competency }}
+          <button class="btn btn-success" ng-disabled="selectDisabled" 
+                                          ng-click="userReferenceCompetency.toggleSelected(); updateSelectedCount()"
+                                                                         ng-hide="userReferenceCompetency.selected">
             Select
           </button>
-          <button class="btn btn-danger" ng-click="selected = false" ng-show="selected">
+          <button class="btn btn-danger" 
+                  ng-click="userReferenceCompetency.toggleSelected(); updateSelectedCount()"
+                  ng-show="userReferenceCompetency.selected">
             Deselect
           </button>
           <div class="clearfix"></div>
         </div>
       </div>
-    <%- end -%>
+    </div>
 
     <h2>Relationship</h2>
     <p>
